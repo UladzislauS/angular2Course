@@ -1,9 +1,10 @@
 @import "../../../../styles/variables/colors.scss";
 
 .footer {
-    background-color: $blue;
+    background-color: $dark-blue;
     text-align: center;
     display: block;
+    color: $white;
 
     .copyright {
         line-height: 40px;
