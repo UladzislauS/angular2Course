@@ -1,0 +1,27 @@
+@import "../../../../styles/variables/colors.scss";
+
+.header {
+    background-color: $blue;
+    display: flex;
+    justify-content: space-between;
+    color: $white;
+
+    .logo, .user {
+        padding: 10px;
+        margin: auto 0;
+    }
+
+    .user {
+        .logged-in, .logged-out {
+            display: flex;
+            flex-direction: column;
+
+            a {
+                color: $gray;
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
