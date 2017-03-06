@@ -1,14 +1,8 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "5.4.1",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
-  "keywords": [
-    "angular2",
-    "webpack",
-    "typescript"
-  ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
+  "name": "angular2Course",
+  "version": "0.0.0",
+  "description": "Repository for Angular 2 courses",
+  "homepage": "https://github.com/UladzislauS/angular2Course",
   "license": "MIT",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
@@ -152,13 +146,6 @@
     "webpack-dev-server": "2.3.0",
     "webpack-dll-bundles-plugin": "^1.0.0-beta.5",
     "webpack-merge": "~2.6.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
