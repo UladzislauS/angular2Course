@@ -22,7 +22,12 @@ import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { NoContentComponent } from './pages/no-content';
-import { HeaderComponent, FooterComponent, LogoComponent, MenuComponent } from './common/components';
+import {
+	HeaderComponent,
+	FooterComponent,
+	LogoComponent,
+	MenuComponent
+} from './common/components';
 
 // Pages
 import { CourseDetailsModule } from './pages/course-details';

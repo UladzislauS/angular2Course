@@ -12,7 +12,7 @@ import {
 
 export class MenuComponent {
 	public menu = [{
-        title: 'courses',
-        url: '/courses'
-    }]
+		title: 'courses',
+		url: '/courses'
+	}];
 }
