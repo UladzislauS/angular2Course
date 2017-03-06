@@ -6,9 +6,9 @@ import {
 
 @Component({
 	selector: 'app-header',
-	styles: [require('../scss/header.component.scss')],
+	styles: [require('../styles/header.styles.scss')],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/header.component.tpl.html'
+	templateUrl: '../tpl/header.tpl.html'
 })
 
 export class HeaderComponent implements OnInit {

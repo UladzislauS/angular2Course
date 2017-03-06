@@ -5,9 +5,9 @@ import {
 
 @Component({
 	selector: 'logo',
-	styles: [ require('../scss/logo.component.scss') ],
+	styles: [ require('../styles/logo.styles.scss') ],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/logo.component.tpl.html'
+	templateUrl: '../tpl/logo.tpl.html'
 })
 
 export class LogoComponent {

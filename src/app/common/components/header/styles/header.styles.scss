@@ -6,7 +6,7 @@
     justify-content: space-between;
     color: $white;
 
-    .logo, .user {
+    .logo, .user, .menu {
         padding: 10px;
         margin: auto 0;
     }
@@ -17,6 +17,7 @@
             flex-direction: column;
 
             a {
+                cursor: pointer;
                 color: $gray;
                 &:hover {
                     color: $white;

@@ -1,14 +1,15 @@
 <div class="header">
     <logo class="logo">Logo</logo>
+    <menu class="menu"></menu>
     <div class="user">
         <div *ngIf="isLoggedIn" class="logged-in">
             <span>
                 {{user.name}}
             </span>
-            <a href="#" class="logoff">Logoff</a>
+            <a (click)="toggleLogIn()" class="logoff">Logoff</a>
         </div>
         <div *ngIf="!isLoggedIn" class="logged-out">
-            <a href="#" class="login">Login</a>
+            <a routerLink="/login" class="login">Login</a>
         </div>
     </div>
 </div>

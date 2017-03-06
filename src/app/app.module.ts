@@ -22,10 +22,12 @@ import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { NoContentComponent } from './pages/no-content';
-import { HeaderComponent, FooterComponent, LogoComponent } from './common/components';
+import { HeaderComponent, FooterComponent, LogoComponent, MenuComponent } from './common/components';
 
 // Pages
+import { CourseDetailsModule } from './pages/course-details';
 import { CoursesModule } from './pages/courses';
+import { LoginModule } from './pages/login';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -37,6 +39,7 @@ import { CoursesModule } from './pages/courses';
 		FooterComponent,
 		HeaderComponent,
 		LogoComponent,
+		MenuComponent,
 		NoContentComponent
 	],
 	imports: [ // import Angular's modules
@@ -44,7 +47,9 @@ import { CoursesModule } from './pages/courses';
 		FormsModule,
 		HttpModule,
 		RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
-		CoursesModule
+		CoursesModule,
+		CourseDetailsModule,
+		LoginModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS

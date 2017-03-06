@@ -6,9 +6,9 @@ import {
 
 @Component({
 	selector: 'app-footer',
-	styles: [require('../scss/footer.component.scss')],
+	styles: [require('../styles/footer.styles.scss')],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/footer.component.tpl.html'
+	templateUrl: '../tpl/footer.tpl.html'
 })
 
 export class FooterComponent {

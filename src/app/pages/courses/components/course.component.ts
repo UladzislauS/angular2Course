@@ -4,7 +4,7 @@ import { CoursePreview } from '../../../common/entities';
 @Component({
 	selector: 'course',
 	templateUrl: '../tpl/course.tpl.html',
-	styles: [require('../styles/course.style.scss')],
+	styles: [require('../styles/course.styles.scss')],
 	providers: [],
 	encapsulation: ViewEncapsulation.None
 })
