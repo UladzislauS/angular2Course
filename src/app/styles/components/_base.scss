@@ -20,8 +20,12 @@ h1, h2, h3, h4, h5 {
 	font-weight: normal;
 }
 
-a, a:focus {
+a, a:focus, a:hover {
 	text-decoration: none;
+}
+
+a {
+	cursor: pointer;
 }
 
 .app {

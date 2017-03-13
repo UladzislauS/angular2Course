@@ -9,11 +9,13 @@ import { routes } from './courses.routes';
 // custom components
 import { CoursesComponent } from './courses.component';
 import { CourseComponent } from '../components/course.component';
+import { ToolboxComponent } from '../components/toolbox.component';
 
 @NgModule({
 	declarations: [
 		CoursesComponent,
-		CourseComponent
+		CourseComponent,
+		ToolboxComponent
 	],
 	imports: [
 		routes,

@@ -1,5 +1,5 @@
-<a routerLink="/course-details" class="course">
-	<div class="information">
+<div class="course">
+	<a routerLink="/course-details" class="information">
 		<div class="information-header">
 			<div class="course-id">Video course {{entity.id}}</div>
 			<div class="course-duration">{{entity.duration}}</div>
@@ -8,10 +8,10 @@
 		<div class="information-container">
 			<div class="course-description">{{entity.description}}</div>
 		</div>
-	</div>
+	</a>
 
 	<div class="actions">
 		<a href="#">Edit course</a>
-		<a href="#">Delete course</a>
+		<a (click)="deleteCourse.emit(entity.id)">Delete course</a>
 	</div>
-</a>
+</div>

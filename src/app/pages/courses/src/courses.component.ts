@@ -16,18 +16,23 @@ export class CoursesComponent implements OnInit {
 	private _courses: CoursePreview[];
 
 	constructor() {
-		this._courses = [
-			new CoursePreview(1, loremIpsum, '1h 10m', new Date() ),
-			new CoursePreview(1, loremIpsum, '1h 10m', new Date() ),
-			new CoursePreview(1, loremIpsum, '1h 10m', new Date() ),
-			new CoursePreview(1, loremIpsum, '1h 10m', new Date() )
-		];
+		this._courses = [];
 	}
 
 	public get courses(): CoursePreview[] {
 		return this._courses;
 	}
 
+	public deleteCourse(id) {
+		console.log(id);
+	}
+
 	public ngOnInit() {
+		this._courses = [
+			new CoursePreview(1, loremIpsum, '1h 10m', new Date() ),
+			new CoursePreview(2, loremIpsum, '1h 10m', new Date() ),
+			new CoursePreview(3, loremIpsum, '1h 10m', new Date() ),
+			new CoursePreview(4, loremIpsum, '1h 10m', new Date() )
+		];
 	}
 }
