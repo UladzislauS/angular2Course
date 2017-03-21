@@ -1,0 +1,11 @@
+<div class="confirm-overlay">
+    <div class="confirm-modal">
+        <p>
+            {{message}}
+        </p>
+        <div class="buttons">
+            <button (click)="confirmHandler.emit(true)" class="Yes">Yes</button>
+            <button (click)="confirmHandler.emit(false)" class="No">No</button>
+        </div>
+    </div>
+</div>

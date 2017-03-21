@@ -3,7 +3,8 @@ import {
 	Component,
 	ViewEncapsulation,
 	Input,
-	Output } from '@angular/core';
+	Output
+} from '@angular/core';
 import { CoursePreview } from '../../../common/entities';
 
 @Component({
@@ -15,5 +16,5 @@ import { CoursePreview } from '../../../common/entities';
 })
 export class CourseComponent {
 	@Input() public entity: CoursePreview;
-	@Output() public deleteCourse = new EventEmitter<string>();
+	@Output() public deleteCourse = new EventEmitter<number>();
 }

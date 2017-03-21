@@ -2,13 +2,13 @@
     <logo class="logo">Logo</logo>
     <menu class="menu"></menu>
     <div class="user">
-        <div *ngIf="isLoggedIn" class="logged-in">
+        <div *ngIf="isLoggedIn()" class="logged-in">
             <span>
-                {{user.name}}
+                {{userName}}
             </span>
-            <a (click)="toggleLogIn()" class="logoff">Logoff</a>
+            <a (click)="logout()" class="logoff">Logoff</a>
         </div>
-        <div *ngIf="!isLoggedIn" class="logged-out">
+        <div *ngIf="!isLoggedIn()" class="logged-out">
             <a routerLink="/login" class="login">Login</a>
         </div>
     </div>

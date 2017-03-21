@@ -1,11 +1,11 @@
-<form name="loginForm">
+<form name="loginForm" class="login-form">
 	<p class="name">
-		<label for="name"></label>
-		<input name="name" type="text">
+		<label for="name">login:</label>
+		<input name="name" type="text" [(ngModel)]="name">
 	</p>
 	<p class="password">
-		<label for="password"></label>
-		<input name="password" type="password">
+		<label for="password">password:</label>
+		<input name="password" type="password" [(ngModel)]="password">
 	</p>
-	<button>Login</button>
+	<button (click)="login()">Login</button>
 </form>

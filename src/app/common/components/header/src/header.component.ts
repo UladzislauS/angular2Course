@@ -3,30 +3,34 @@ import {
 	OnInit,
 	ViewEncapsulation
 } from '@angular/core';
+import { AuthService } from '../../../services';
 
 @Component({
 	selector: 'app-header',
+	providers: [AuthService],
 	styles: [require('../styles/header.styles.scss')],
 	encapsulation: ViewEncapsulation.None,
 	templateUrl: '../tpl/header.tpl.html'
 })
 
 export class HeaderComponent implements OnInit {
-	public user = {
-			name: 'user login'
-	};
+	private _userName: string;
 
-	private _isLoggedIn = false;
+	constructor(private authService: AuthService) {}
 
-	get isLoggedIn(): boolean {
-		return this._isLoggedIn;
+	public logout(): void {
+		this.authService.logout();
 	}
 
-	public toggleLogIn() {
-		this._isLoggedIn = !this._isLoggedIn;
+	public isLoggedIn(): boolean {
+		return this.authService.isAuthenticated();
 	}
 
-	public ngOnInit() {
-		this._isLoggedIn = true;
+	get userName(): string {
+		return this._userName;
+	}
+
+	public ngOnInit(): void {
+		this._userName = this.authService.getUserInfo();
 	}
 }

@@ -6,4 +6,7 @@
 			[entity]="course"
 			(deleteCourse)="deleteCourse($event)"></course>
 	</div>
+	<confirm *ngIf="confirmDeletePopup" 
+		[message]="confirmMessage" 
+		(confirmHandler)="deleteConfirmHandler($event)"></confirm>
 </div>

@@ -7,12 +7,14 @@ import { CommonModule } from '@angular/common';
 import { routes } from './courses.routes';
 
 // custom components
+import { ConfirmComponent } from '../components/confirm.component';
 import { CoursesComponent } from './courses.component';
 import { CourseComponent } from '../components/course.component';
 import { ToolboxComponent } from '../components/toolbox.component';
 
 @NgModule({
 	declarations: [
+		ConfirmComponent,
 		CoursesComponent,
 		CourseComponent,
 		ToolboxComponent
