@@ -1,14 +1,16 @@
 import {
 	Component,
 	OnInit,
-	ViewEncapsulation
+	ViewEncapsulation,
+	ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
 	selector: 'app-footer',
 	styles: [require('../styles/footer.styles.scss')],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/footer.tpl.html'
+	templateUrl: '../tpl/footer.tpl.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class FooterComponent {

@@ -1,36 +1,49 @@
 import {
 	Component,
 	OnInit,
-	ViewEncapsulation
+	ViewEncapsulation,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef
 } from '@angular/core';
 import { AuthService } from '../../../services';
 
 @Component({
 	selector: 'app-header',
-	providers: [AuthService],
 	styles: [require('../styles/header.styles.scss')],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/header.tpl.html'
+	templateUrl: '../tpl/header.tpl.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class HeaderComponent implements OnInit {
 	private _userName: string;
+	private _isAuth: boolean;
 
-	constructor(private authService: AuthService) {}
-
-	public logout(): void {
-		this.authService.logout();
-	}
-
-	public isLoggedIn(): boolean {
-		return this.authService.isAuthenticated();
-	}
+	constructor(
+		private authService: AuthService,
+		private cd: ChangeDetectorRef
+	) {}
 
 	get userName(): string {
 		return this._userName;
 	}
 
+	get isAuth(): boolean {
+		return this._isAuth;
+	}
+
+	public logout(): void {
+		this.authService.logout();
+	}
+
 	public ngOnInit(): void {
-		this._userName = this.authService.getUserInfo();
+		this.authService.isAuthenticated.subscribe( (res: boolean): void => {
+			this._isAuth = res;
+			this.cd.markForCheck();
+		});
+		this.authService.userInfo.subscribe( (res: string): void => {
+			this._userName = res;
+			this.cd.markForCheck();
+		});
 	}
 }

@@ -1,6 +1,6 @@
-import { CourseItem } from './courseItem';
+import { Course } from './Course';
 
-export  class CourseDetailed implements CourseItem {
+export  class CourseDetailed implements Course {
 	constructor(
 		private _id: number,
 		public description: string,

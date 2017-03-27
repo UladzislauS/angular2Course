@@ -3,7 +3,8 @@ import {
 	Component,
 	ViewEncapsulation,
 	Input,
-	Output
+	Output,
+	ChangeDetectionStrategy
 } from '@angular/core';
 import { CoursePreview } from '../../../common/entities';
 
@@ -12,7 +13,8 @@ import { CoursePreview } from '../../../common/entities';
 	templateUrl: '../tpl/course.tpl.html',
 	styles: [require('../styles/course.styles.scss')],
 	providers: [],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent {
 	@Input() public entity: CoursePreview;

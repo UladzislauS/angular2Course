@@ -1,4 +1,10 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+	Component,
+	ViewEncapsulation,
+	OnInit,
+	ChangeDetectionStrategy
+} from '@angular/core';
+
 import { CourseDetailed } from '../../../common/entities';
 
 // temporary
@@ -9,7 +15,8 @@ let loremIpsum = `Lorem Ipsum is simply dummy text of the printing and typesetti
 	encapsulation: ViewEncapsulation.None,
 	providers: [],
 	styles: [require('../styles/course-details.styles.scss')],
-	templateUrl: '../tpl/course-details.tpl.html'
+	templateUrl: '../tpl/course-details.tpl.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseDetailsComponent {
 	private _course: CourseDetailed;

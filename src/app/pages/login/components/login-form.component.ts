@@ -1,6 +1,11 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
-import { Router }   from '@angular/router';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ViewEncapsulation,
+	Input
+} from '@angular/core';
 
+import { Router }   from '@angular/router';
 import { AuthService } from '../../../common/services';
 import { User } from '../../../common/entities';
 
@@ -8,8 +13,8 @@ import { User } from '../../../common/entities';
 	selector: 'login-form',
 	templateUrl: '../tpl/login-form.tpl.html',
 	styles: [require('../styles/login-form.styles.scss')],
-	providers: [AuthService],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent {
 	public name: string;

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { CourseDetailed } from '../entities';
 
 // temporary
@@ -6,34 +7,30 @@ let loremIpsum = `Lorem Ipsum is simply dummy text of the printing and typesetti
 
 @Injectable()
 export class CoursesService {
-	private _courses: CourseDetailed[] = [
-		new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau_S', 0 ),
-		new CourseDetailed(2, loremIpsum, '1h 20m', new Date(), 'Uladzislau_S', 0 ),
-		new CourseDetailed(3, loremIpsum, '1h 35m', new Date(), 'Uladzislau_S', 0 ),
-		new CourseDetailed(4, loremIpsum, '1h 55m', new Date(), 'Uladzislau_S', 0 )
-	];
+	private _courses: BehaviorSubject<CourseDetailed[]>;
 
-	public get courses(): CourseDetailed[] {
+	constructor() {
+		this._courses = new BehaviorSubject([
+			new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau_S', 0 ),
+			new CourseDetailed(2, loremIpsum, '1h 20m', new Date(), 'Uladzislau_S', 0 ),
+			new CourseDetailed(3, loremIpsum, '1h 35m', new Date(), 'Uladzislau_S', 0 ),
+			new CourseDetailed(4, loremIpsum, '1h 55m', new Date(), 'Uladzislau_S', 0 )
+		]);
+	}
+
+	public get courses(): Observable<CourseDetailed[]> {
+		return this._courses.asObservable();
+	}
+
+	public addNewCourse(course: CourseDetailed): Observable<CourseDetailed[]> {
+		let courses: CourseDetailed[] = this._courses.getValue();
+		courses.push(course);
+		this._courses.next(courses);
+
 		return this._courses;
 	}
 
-	public getCourseById(id: number): CourseDetailed {
-		for (let course of this._courses) {
-			if (course.id === id) {
-				return course;
-			}
-		}
-
-		return null;
-	}
-
-	public addNewCourse(course: CourseDetailed): CourseDetailed {
-		this._courses.push(course);
-
-		return course;
-	}
-
-	public updateCourse(newCourse: CourseDetailed): CourseDetailed {
+	public updateCourse(newCourse: CourseDetailed): Observable<CourseDetailed[]> {
 		let course = this.getCourseById(newCourse.id);
 
 		course.author = newCourse.author;
@@ -42,15 +39,27 @@ export class CoursesService {
 		course.duration = newCourse.duration;
 		course.likes = newCourse.likes;
 
-		return course;
+		return this._courses;
 	}
 
-	public removeCourse(id: number) {
-		let course = this.getCourseById(id);
-		let index = this._courses.indexOf(course);
+	public removeCourse(id: number): Observable<CourseDetailed[]> {
+		let course: CourseDetailed = this.getCourseById(id);
+		let courses: CourseDetailed[] = this._courses.getValue();
+		let index: number = courses.indexOf(course);
 
-		this._courses.splice(index, index || 1);
+		courses.splice(index, index || 1);
+		this._courses.next(courses);
 
 		return this._courses;
+	}
+
+	public getCourseById(id: number): CourseDetailed {
+		for ( let course of this._courses.getValue() ) {
+			if (course.id === id) {
+				return course;
+			}
+		}
+
+		return null;
 	}
 }

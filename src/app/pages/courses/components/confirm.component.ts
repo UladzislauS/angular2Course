@@ -3,7 +3,8 @@ import {
 	Component,
 	ViewEncapsulation,
 	Output,
-	Input
+	Input,
+	ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -11,7 +12,8 @@ import {
 	templateUrl: '../tpl/confirm.tpl.html',
 	styles: [require('../styles/confirm.styles.scss')],
 	providers: [],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmComponent {
 	@Input() public message: string;

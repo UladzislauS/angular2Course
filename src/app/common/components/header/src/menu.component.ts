@@ -1,13 +1,15 @@
 import {
 	Component,
-	ViewEncapsulation
+	ViewEncapsulation,
+	ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
 	selector: 'menu',
 	styles: [ require('../styles/menu.styles.scss') ],
 	encapsulation: ViewEncapsulation.None,
-	templateUrl: '../tpl/menu.tpl.html'
+	templateUrl: '../tpl/menu.tpl.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MenuComponent {

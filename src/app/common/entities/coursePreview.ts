@@ -1,6 +1,6 @@
-import { CourseItem } from './courseItem';
+import { Course } from './Course';
 
-export  class CoursePreview implements CourseItem {
+export  class CoursePreview implements Course {
 	constructor(
 		public id: number,
 		public description: string,

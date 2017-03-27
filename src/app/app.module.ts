@@ -33,6 +33,10 @@ import {
 import { CourseDetailsModule } from './pages/course-details';
 import { CoursesModule } from './pages/courses';
 import { LoginModule } from './pages/login';
+import {
+	AuthService,
+	CoursesService
+} from './common/services';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -57,8 +61,10 @@ import { LoginModule } from './pages/login';
 		LoginModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
-		ENV_PROVIDERS
-	]
+		ENV_PROVIDERS,
+		AuthService,
+		CoursesService
+	],
 })
 export class AppModule {
 

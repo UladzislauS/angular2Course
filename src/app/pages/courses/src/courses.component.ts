@@ -1,4 +1,9 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+	Component,
+	ViewEncapsulation,
+	OnInit,
+	ChangeDetectionStrategy
+} from '@angular/core';
 
 import { CourseDetailed } from '../../../common/entities';
 import {
@@ -10,12 +15,9 @@ import {
 @Component({
 	selector: 'courses',
 	encapsulation: ViewEncapsulation.None,
-	providers: [
-		AuthService,
-		CoursesService
-	],
 	styles: [require('../styles/courses.styles.scss')],
-	templateUrl: '../tpl/courses.tpl.html'
+	templateUrl: '../tpl/courses.tpl.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesComponent implements OnInit {
 	public confirmDeletePopup: boolean;
@@ -48,6 +50,8 @@ export class CoursesComponent implements OnInit {
 	}
 
 	public ngOnInit() {
-		this._courses = this.coursesService.courses;
+		this.coursesService.courses.subscribe( (courses: CourseDetailed[]): void => {
+			this._courses = courses;
+		});
 	}
 }
