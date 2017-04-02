@@ -2,7 +2,8 @@ import {
 	Component,
 	ViewEncapsulation,
 	OnInit,
-	ChangeDetectionStrategy
+	ChangeDetectionStrategy,
+	ChangeDetectorRef
 } from '@angular/core';
 
 import { CourseDetailed } from '../../../common/entities';
@@ -10,6 +11,9 @@ import {
 	AuthService,
 	CoursesService
 } from '../../../common/services';
+import {
+	SpinnerService
+} from '../../../common/components';
 
 // temporary
 @Component({
@@ -26,7 +30,11 @@ export class CoursesComponent implements OnInit {
 	private _courses: CourseDetailed[];
 	private removableCourseId: number;
 
-	constructor(private authService: AuthService, private coursesService: CoursesService) {
+	constructor(private authService: AuthService,
+		private coursesService: CoursesService,
+		private spinnerService: SpinnerService,
+		private changeDetector: ChangeDetectorRef) {
+
 		this._courses = [];
 		this.confirmDeletePopup = false;
 		this.confirmMessage = 'Do you want to remove this course?';
@@ -43,7 +51,15 @@ export class CoursesComponent implements OnInit {
 
 	public deleteConfirmHandler(value: boolean): void {
 		if (value) {
-			this.coursesService.removeCourse(this.removableCourseId);
+			this.spinnerService.toggle(true);
+			this.coursesService
+				.removeCourse(this.removableCourseId)
+				.subscribe(
+					() => {},
+					() => {},
+					() => {
+						this.spinnerService.toggle(false);
+					});
 		}
 		this.removableCourseId = null;
 		this.confirmDeletePopup = false;
@@ -52,6 +68,7 @@ export class CoursesComponent implements OnInit {
 	public ngOnInit() {
 		this.coursesService.courses.subscribe( (courses: CourseDetailed[]): void => {
 			this._courses = courses;
+			this.changeDetector.markForCheck();
 		});
 	}
 }

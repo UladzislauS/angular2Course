@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { CourseDetailed } from '../entities';
 
 // temporary
@@ -42,15 +42,20 @@ export class CoursesService {
 		return this._courses;
 	}
 
-	public removeCourse(id: number): Observable<CourseDetailed[]> {
+	public removeCourse(id: number): Subject<CourseDetailed[]> {
 		let course: CourseDetailed = this.getCourseById(id);
 		let courses: CourseDetailed[] = this._courses.getValue();
 		let index: number = courses.indexOf(course);
+		let subject = new Subject<CourseDetailed[]>();
+		
+		setTimeout(() => {
+			courses.splice(index, index || 1);
+			this._courses.next(courses);
+			subject.next(courses);
+			subject.complete();
+		}, 500);
 
-		courses.splice(index, index || 1);
-		this._courses.next(courses);
-
-		return this._courses;
+		return subject;
 	}
 
 	public getCourseById(id: number): CourseDetailed {

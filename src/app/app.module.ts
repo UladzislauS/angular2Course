@@ -26,17 +26,23 @@ import {
 	HeaderComponent,
 	FooterComponent,
 	LogoComponent,
-	MenuComponent
+	MenuComponent,
+	SpinnerComponent
 } from './common/components';
 
 // Pages
 import { CourseDetailsModule } from './pages/course-details';
 import { CoursesModule } from './pages/courses';
 import { LoginModule } from './pages/login';
+
+// Services
 import {
 	AuthService,
 	CoursesService
 } from './common/services';
+import {
+	SpinnerService
+} from './common/components';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -49,7 +55,8 @@ import {
 		HeaderComponent,
 		LogoComponent,
 		MenuComponent,
-		NoContentComponent
+		NoContentComponent,
+		SpinnerComponent
 	],
 	imports: [ // import Angular's modules
 		BrowserModule,
@@ -63,7 +70,8 @@ import {
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,
 		AuthService,
-		CoursesService
+		CoursesService,
+		SpinnerService
 	],
 })
 export class AppModule {

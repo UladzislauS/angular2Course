@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
 	constructor(
 		private authService: AuthService,
-		private cd: ChangeDetectorRef
+		private changeDetector: ChangeDetectorRef
 	) {}
 
 	get userName(): string {
@@ -39,11 +39,11 @@ export class HeaderComponent implements OnInit {
 	public ngOnInit(): void {
 		this.authService.isAuthenticated.subscribe( (res: boolean): void => {
 			this._isAuth = res;
-			this.cd.markForCheck();
+			this.changeDetector.markForCheck();
 		});
 		this.authService.userInfo.subscribe( (res: string): void => {
 			this._userName = res;
-			this.cd.markForCheck();
+			this.changeDetector.markForCheck();
 		});
 	}
 }
