@@ -6,7 +6,7 @@ import {
 	Output,
 	ChangeDetectionStrategy
 } from '@angular/core';
-import { CoursePreview } from '../../../common/entities';
+import { CourseDetailed } from '../../../common/entities';
 
 @Component({
 	selector: 'course',
@@ -17,6 +17,6 @@ import { CoursePreview } from '../../../common/entities';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseComponent {
-	@Input() public entity: CoursePreview;
+	@Input() public entity: CourseDetailed;
 	@Output() public deleteCourse = new EventEmitter<number>();
 }

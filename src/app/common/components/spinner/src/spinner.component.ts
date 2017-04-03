@@ -26,7 +26,6 @@ export class SpinnerComponent implements OnInit {
 		this.spinnerService
 			.getSwitchedStatus()
 			.subscribe( (value: boolean) => {
-				console.log('toggled');
 				this.isSwitchedOn = value;
 				this.changeDetector.markForCheck();
 			});

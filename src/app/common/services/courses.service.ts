@@ -11,12 +11,12 @@ export class CoursesService {
 
 	constructor() {
 		this._courses = new BehaviorSubject([
-			new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau_S', 0, true ),
-			new CourseDetailed(2, loremIpsum, '1h 20m', new Date('03.20.2017'), 'Uladzislau_S', 0, false ),
-			new CourseDetailed(3, loremIpsum, '1h 35m', new Date('05.21.2017'), 'Uladzislau_S', 0, true ),
-			new CourseDetailed(4, loremIpsum, '1h 35m', new Date('02.20.2016'), 'Uladzislau_S', 0, false ),
-			new CourseDetailed(5, loremIpsum, '1h 35m', new Date('03.02.2017'), 'Uladzislau_S', 0, true ),
-			new CourseDetailed(6, loremIpsum, '1h 55m', new Date('04.14.2017'), 'Uladzislau_S', 0, false )
+			new CourseDetailed(1, 'First course', loremIpsum, 100, new Date(), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(2, 'Second course', loremIpsum, 80, new Date('03.20.2017'), 'Uladzislau_S', 0, false ),
+			new CourseDetailed(3, 'Third course', loremIpsum, 45, new Date('05.21.2017'), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(4, 'Fourth course', loremIpsum, 110, new Date('02.20.2016'), 'Uladzislau_S', 0, false ),
+			new CourseDetailed(5, 'Fifth course', loremIpsum, 35, new Date('03.02.2017'), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(6, 'Sixth course', loremIpsum, 135, new Date('04.14.2017'), 'Uladzislau_S', 0, false )
 		]);
 	}
 

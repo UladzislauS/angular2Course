@@ -6,7 +6,10 @@ import {
 	ChangeDetectorRef
 } from '@angular/core';
 
+// entities
 import { CourseDetailed } from '../../../common/entities';
+
+// services
 import {
 	AuthService,
 	CoursesService
@@ -15,10 +18,15 @@ import {
 	SpinnerService
 } from '../../../common/components';
 
-// temporary
+// pipes
+import {
+	FilterPipe
+} from '../../../common/pipes';
+
 @Component({
 	selector: 'courses',
 	encapsulation: ViewEncapsulation.None,
+	providers: [FilterPipe],
 	styles: [require('../styles/courses.styles.scss')],
 	templateUrl: '../tpl/courses.tpl.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,7 +34,7 @@ import {
 export class CoursesComponent implements OnInit {
 	public confirmDeletePopup: boolean;
 	public confirmMessage: string;
-
+	public viewCourses: CourseDetailed[];
 	private _courses: CourseDetailed[];
 	private removableCourseId: number;
 
@@ -34,6 +42,7 @@ export class CoursesComponent implements OnInit {
 		private authService: AuthService,
 		private coursesService: CoursesService,
 		private spinnerService: SpinnerService,
+		private filterPipe: FilterPipe,
 		private changeDetector: ChangeDetectorRef) {
 
 		this._courses = [];
@@ -66,9 +75,14 @@ export class CoursesComponent implements OnInit {
 		this.confirmDeletePopup = false;
 	}
 
+	public findCourse(filter: string): void {
+		this.viewCourses = this.filterPipe.transform(this._courses, 'name', filter);
+	}
+
 	public ngOnInit() {
 		this.coursesService.courses.subscribe( (courses: CourseDetailed[]): void => {
 			this._courses = courses;
+			this.viewCourses = courses;
 			this.changeDetector.markForCheck();
 		});
 	}

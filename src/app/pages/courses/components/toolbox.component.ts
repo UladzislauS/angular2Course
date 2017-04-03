@@ -1,7 +1,9 @@
 import {
 	Component,
+	EventEmitter,
 	ViewEncapsulation,
-	ChangeDetectionStrategy
+	ChangeDetectionStrategy,
+	Output
 } from '@angular/core';
 
 @Component({
@@ -15,9 +17,7 @@ import {
 export class ToolboxComponent {
 	public value: string;
 
-	public findCourse() {
-		console.log(this.value);
-	}
+	@Output() public findCourse = new EventEmitter<string>();
 
 	public addCourse() {
 		console.log('Nothing');

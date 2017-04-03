@@ -15,13 +15,23 @@ import { ToolboxComponent } from '../components/toolbox.component';
 // directives
 import { CourseHighlightDirective } from '../directives/cource-highlight.directive';
 
+// pipes
+import {
+	CourseDurationPipe,
+	OrderByPipe,
+	FilterPipe
+} from '../../../common/pipes';
+
 @NgModule({
 	declarations: [
 		ConfirmComponent,
 		CoursesComponent,
 		CourseComponent,
 		ToolboxComponent,
-		CourseHighlightDirective
+		CourseHighlightDirective,
+		CourseDurationPipe,
+		OrderByPipe,
+		FilterPipe
 	],
 	imports: [
 		routes,
