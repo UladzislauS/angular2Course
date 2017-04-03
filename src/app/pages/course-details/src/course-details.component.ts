@@ -22,7 +22,7 @@ export class CourseDetailsComponent {
 	private _course: CourseDetailed;
 
 	constructor() {
-		this._course = new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau Sipaila', 0);
+		this._course = new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau Sipaila', 0, false);
 	}
 
 	get course(): CourseDetailed {

@@ -30,7 +30,8 @@ export class CoursesComponent implements OnInit {
 	private _courses: CourseDetailed[];
 	private removableCourseId: number;
 
-	constructor(private authService: AuthService,
+	constructor(
+		private authService: AuthService,
 		private coursesService: CoursesService,
 		private spinnerService: SpinnerService,
 		private changeDetector: ChangeDetectorRef) {

@@ -1,8 +1,15 @@
 <div class="course">
-	<a routerLink="/course-details" class="information">
+	<a routerLink="/course-details"
+	   courseHighlight [date]="entity.date"
+	   class="information"
+	   [ngClass]="{'top-rated': entity.topRated}">
 		<div class="information-header">
 			<div class="course-id">Video course {{entity.id}}</div>
-			<div class="course-duration">{{entity.duration}}</div>
+			<div class="course-duration">
+				{{entity.duration}}
+				<span class="course-rate" *ngIf="entity.topRated">&#9733;</span>
+				<span class="course-rate" *ngIf="!entity.topRated">&#9734;</span>
+			</div>
 			<div class="course-date">{{entity.date | date : 'MM/dd/yyyy'}}</div>
 		</div>
 		<div class="information-container">

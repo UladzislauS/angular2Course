@@ -4,6 +4,7 @@
     margin: 10px 0;
     display: flex;
 
+
     .information {
         color: inherit;
         padding: 5px;
@@ -12,6 +13,10 @@
         background-color: $white;
         flex-grow: 1;
         max-width: 700px;
+
+        &.top-rated {
+            background-color: $light-green;
+        }
 
         &:hover {
             background-color: $gray;

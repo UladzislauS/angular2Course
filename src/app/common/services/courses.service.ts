@@ -11,10 +11,12 @@ export class CoursesService {
 
 	constructor() {
 		this._courses = new BehaviorSubject([
-			new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau_S', 0 ),
-			new CourseDetailed(2, loremIpsum, '1h 20m', new Date(), 'Uladzislau_S', 0 ),
-			new CourseDetailed(3, loremIpsum, '1h 35m', new Date(), 'Uladzislau_S', 0 ),
-			new CourseDetailed(4, loremIpsum, '1h 55m', new Date(), 'Uladzislau_S', 0 )
+			new CourseDetailed(1, loremIpsum, '1h 10m', new Date(), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(2, loremIpsum, '1h 20m', new Date('03.20.2017'), 'Uladzislau_S', 0, false ),
+			new CourseDetailed(3, loremIpsum, '1h 35m', new Date('05.21.2017'), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(4, loremIpsum, '1h 35m', new Date('02.20.2016'), 'Uladzislau_S', 0, false ),
+			new CourseDetailed(5, loremIpsum, '1h 35m', new Date('03.02.2017'), 'Uladzislau_S', 0, true ),
+			new CourseDetailed(6, loremIpsum, '1h 55m', new Date('04.14.2017'), 'Uladzislau_S', 0, false )
 		]);
 	}
 
@@ -47,7 +49,7 @@ export class CoursesService {
 		let courses: CourseDetailed[] = this._courses.getValue();
 		let index: number = courses.indexOf(course);
 		let subject = new Subject<CourseDetailed[]>();
-		
+
 		setTimeout(() => {
 			courses.splice(index, index || 1);
 			this._courses.next(courses);

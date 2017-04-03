@@ -12,12 +12,16 @@ import { CoursesComponent } from './courses.component';
 import { CourseComponent } from '../components/course.component';
 import { ToolboxComponent } from '../components/toolbox.component';
 
+// directives
+import { CourseHighlightDirective } from '../directives/cource-highlight.directive';
+
 @NgModule({
 	declarations: [
 		ConfirmComponent,
 		CoursesComponent,
 		CourseComponent,
-		ToolboxComponent
+		ToolboxComponent,
+		CourseHighlightDirective
 	],
 	imports: [
 		routes,
