@@ -32,6 +32,7 @@ import {
 
 // Pages
 import { CourseDetailsModule } from './pages/course-details';
+import { CourseEditModule } from './pages/course-edit';
 import { CoursesModule } from './pages/courses';
 import { LoginModule } from './pages/login';
 
@@ -65,6 +66,7 @@ import {
 		RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
 		CoursesModule,
 		CourseDetailsModule,
+		CourseEditModule,
 		LoginModule
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
@@ -72,7 +74,7 @@ import {
 		AuthService,
 		CoursesService,
 		SpinnerService
-	],
+	]
 })
 export class AppModule {
 

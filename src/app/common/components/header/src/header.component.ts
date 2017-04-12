@@ -1,11 +1,13 @@
 import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	OnInit,
-	ViewEncapsulation,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef
+	OnDestroy,
+	ViewEncapsulation
 } from '@angular/core';
 import { AuthService } from '../../../services';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
@@ -15,9 +17,11 @@ import { AuthService } from '../../../services';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 	private _userName: string;
 	private _isAuth: boolean;
+	private authSubscription: Subscription;
+	private infoSubscription: Subscription;
 
 	constructor(
 		private authService: AuthService,
@@ -37,13 +41,18 @@ export class HeaderComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.authService.isAuthenticated.subscribe( (res: boolean): void => {
+		this.authSubscription = this.authService.isAuthenticated.subscribe( (res: boolean): void => {
 			this._isAuth = res;
 			this.changeDetector.markForCheck();
 		});
-		this.authService.userInfo.subscribe( (res: string): void => {
+		this.infoSubscription = this.authService.userInfo.subscribe( (res: string): void => {
 			this._userName = res;
 			this.changeDetector.markForCheck();
 		});
+	}
+
+	public ngOnDestroy() {
+		this.authSubscription.unsubscribe();
+		this.infoSubscription.unsubscribe();
 	}
 }

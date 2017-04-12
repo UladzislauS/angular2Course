@@ -1,0 +1,28 @@
+﻿@import "../../../styles/variables/colors.scss";
+
+.edit-form {
+    text-align: center;
+    margin: 10px auto;
+    max-width: 500px;
+
+    .title, .description, .date, .duration {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px auto;
+
+        input, textarea {
+            width: 250px;
+        }
+    }
+
+    .duration {
+        position: relative;
+
+        .course-duration-parce {
+            position: absolute;
+            top: 0;
+            left: 500px; 
+            width: 100px;
+        }
+    }
+}

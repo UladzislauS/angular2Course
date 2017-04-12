@@ -1,11 +1,13 @@
 import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	OnInit,
-	ViewEncapsulation,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef
+	OnDestroy,
+	ViewEncapsulation
 } from '@angular/core';
 import { SpinnerService } from './spinner.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'spinner',
@@ -15,19 +17,25 @@ import { SpinnerService } from './spinner.service';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class SpinnerComponent implements OnInit {
+export class SpinnerComponent implements OnInit, OnDestroy {
 	public isSwitchedOn: boolean;
+
+	private subscription: Subscription;
 
 	constructor(private spinnerService: SpinnerService, private changeDetector: ChangeDetectorRef) {
 		this.isSwitchedOn = false;
 	}
 
 	public ngOnInit() {
-		this.spinnerService
+		this.subscription = this.spinnerService
 			.getSwitchedStatus()
 			.subscribe( (value: boolean) => {
 				this.isSwitchedOn = value;
 				this.changeDetector.markForCheck();
 			});
+	}
+
+	public ngOnDestroy() {
+		this.subscription.unsubscribe();
 	}
 }

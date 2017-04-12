@@ -10,14 +10,30 @@ export class CoursesService {
 	private _courses: BehaviorSubject<CourseDetailed[]>;
 
 	constructor() {
-		this._courses = new BehaviorSubject([
+		let newCourses: Observable<CourseDetailed> = Observable.of(
 			new CourseDetailed(1, 'First course', loremIpsum, 100, new Date(), 'Uladzislau_S', 0, true ),
 			new CourseDetailed(2, 'Second course', loremIpsum, 80, new Date('03.20.2017'), 'Uladzislau_S', 0, false ),
 			new CourseDetailed(3, 'Third course', loremIpsum, 45, new Date('05.21.2017'), 'Uladzislau_S', 0, true ),
 			new CourseDetailed(4, 'Fourth course', loremIpsum, 110, new Date('02.20.2016'), 'Uladzislau_S', 0, false ),
 			new CourseDetailed(5, 'Fifth course', loremIpsum, 35, new Date('03.02.2017'), 'Uladzislau_S', 0, true ),
 			new CourseDetailed(6, 'Sixth course', loremIpsum, 135, new Date('04.14.2017'), 'Uladzislau_S', 0, false )
-		]);
+		);
+
+		newCourses
+			.filter((course) => {
+				let timeDiff = new Date().getTime() - course.date.getTime();
+
+				return ( timeDiff / (1000 * 3600 * 24) ) < 14;
+			})
+			.map((course) => {
+				course.name = `AngularJS 2: ${course.name}`;
+
+				return course;
+			})
+			.toArray()
+			.subscribe((courses) => {
+				this._courses = new BehaviorSubject(courses);
+			});
 	}
 
 	public get courses(): Observable<CourseDetailed[]> {

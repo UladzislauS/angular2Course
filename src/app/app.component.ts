@@ -5,8 +5,7 @@ import {
 	Component,
 	OnInit,
 	ViewEncapsulation,
-	ChangeDetectionStrategy,
-	NgZone
+	ChangeDetectionStrategy
 } from '@angular/core';
 
 /*
@@ -25,14 +24,4 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AppComponent implements OnInit {
-
-	constructor(private ngZone: NgZone) {
-	}
-
-	public ngOnInit() {
-		this.ngZone.onUnstable.subscribe( () => console.time('Checking perf') );
-		this.ngZone.onStable.subscribe( () => console.timeEnd('Checking perf') );
-	}
-
-}
+export class AppComponent {}

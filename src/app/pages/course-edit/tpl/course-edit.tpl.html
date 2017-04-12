@@ -1,0 +1,25 @@
+<form name="editForm" class="edit-form">
+	<div class="title">
+		<label for="title">Title:</label>
+		<input name="title" type="text" [(ngModel)]="title">
+	</div>
+	<div class="description">
+		<label for="description">Description:</label>
+		<textarea name="description" [(ngModel)]="description"></textarea>
+	</div>
+	<div class="date">
+		<label for="date">Date:</label>
+		<input name="date" type="date" [(ngModel)]="date">
+	</div>
+	<div class="duration">
+		<label for="duration">Duration:</label>
+		<input name="duration" type="number" [(ngModel)]="duration">
+		<p class="course-duration-parce">{{duration | courseDuration}}</p>
+	</div>
+
+	<!--skipped by condition
+	<authors></authors>-->
+
+	<button (click)="add()">Add</button>
+	<button (click)="cancel()">Cancel</button>
+</form>

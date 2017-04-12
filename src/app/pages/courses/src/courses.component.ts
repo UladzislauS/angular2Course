@@ -2,9 +2,11 @@ import {
 	Component,
 	ViewEncapsulation,
 	OnInit,
+	OnDestroy,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 // entities
 import { CourseDetailed } from '../../../common/entities';
@@ -14,14 +16,10 @@ import {
 	AuthService,
 	CoursesService
 } from '../../../common/services';
-import {
-	SpinnerService
-} from '../../../common/components';
+import { SpinnerService } from '../../../common/components';
 
 // pipes
-import {
-	FilterPipe
-} from '../../../common/pipes';
+import { FilterPipe } from '../../../common/pipes';
 
 @Component({
 	selector: 'courses',
@@ -31,12 +29,14 @@ import {
 	templateUrl: '../tpl/courses.tpl.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
 	public confirmDeletePopup: boolean;
 	public confirmMessage: string;
 	public viewCourses: CourseDetailed[];
+
 	private _courses: CourseDetailed[];
 	private removableCourseId: number;
+	private subscription: Subscription;
 
 	constructor(
 		private authService: AuthService,
@@ -80,10 +80,17 @@ export class CoursesComponent implements OnInit {
 	}
 
 	public ngOnInit() {
-		this.coursesService.courses.subscribe( (courses: CourseDetailed[]): void => {
+		this.subscription = this.coursesService.courses.filter( (value) => {
+				console.log(value);
+				return true;
+			} ).subscribe( (courses: CourseDetailed[]): void => {
 			this._courses = courses;
 			this.viewCourses = courses;
 			this.changeDetector.markForCheck();
 		});
+	}
+
+	public ngOnDestroy() {
+		this.subscription.unsubscribe();
 	}
 }
