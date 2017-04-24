@@ -1,30 +1,39 @@
 import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
-	ViewEncapsulation,
 	OnInit,
 	OnDestroy,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef
+	ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
-// entities
-import { CourseDetailed } from '../../../common/entities';
+import {
+	ActivatedRoute,
+	Params,
+	Router
+} from '@angular/router';
 
-// services
+import {
+	Observable,
+	Subscription
+} from 'rxjs';
+
+import {
+	CourseDetailed
+} from '../../../common/entities';
+
 import {
 	AuthService,
 	CoursesService
 } from '../../../common/services';
-import { SpinnerService } from '../../../common/components';
 
-// pipes
-import { FilterPipe } from '../../../common/pipes';
+import {
+	SpinnerService
+} from '../../../common/components';
 
 @Component({
 	selector: 'courses',
 	encapsulation: ViewEncapsulation.None,
-	providers: [FilterPipe],
 	styles: [require('../styles/courses.styles.scss')],
 	templateUrl: '../tpl/courses.tpl.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,26 +41,24 @@ import { FilterPipe } from '../../../common/pipes';
 export class CoursesComponent implements OnInit, OnDestroy {
 	public confirmDeletePopup: boolean;
 	public confirmMessage: string;
-	public viewCourses: CourseDetailed[];
+	public courses: CourseDetailed[];
+	public coursesCount: number;
+	public currentPage: number;
 
-	private _courses: CourseDetailed[];
 	private removableCourseId: number;
 	private subscription: Subscription;
 
 	constructor(
 		private authService: AuthService,
+		private changeDetector: ChangeDetectorRef,
 		private coursesService: CoursesService,
-		private spinnerService: SpinnerService,
-		private filterPipe: FilterPipe,
-		private changeDetector: ChangeDetectorRef) {
-
-		this._courses = [];
+		private route: ActivatedRoute,
+		private router: Router,
+		private spinnerService: SpinnerService
+	) {
+		this.courses = [];
 		this.confirmDeletePopup = false;
 		this.confirmMessage = 'Do you want to remove this course?';
-	}
-
-	public get courses(): CourseDetailed[] {
-		return this._courses;
 	}
 
 	public deleteCourse(id: number): void {
@@ -76,18 +83,26 @@ export class CoursesComponent implements OnInit, OnDestroy {
 	}
 
 	public findCourse(filter: string): void {
-		this.viewCourses = this.filterPipe.transform(this._courses, 'name', filter);
+		this.router.navigate(['/courses', 1], {
+			queryParams: { filter: filter || undefined }
+		});
 	}
 
 	public ngOnInit() {
-		this.subscription = this.coursesService.courses.filter( (value) => {
-				console.log(value);
-				return true;
-			} ).subscribe( (courses: CourseDetailed[]): void => {
-			this._courses = courses;
-			this.viewCourses = courses;
-			this.changeDetector.markForCheck();
-		});
+		this.subscription = Observable
+			.combineLatest(this.route.params, this.route.queryParams, (params, queryParams) => ({params, queryParams}))
+			.switchMap((params) => {
+				this.currentPage = +params.params['page'];
+				this.spinnerService.toggle(true);
+
+				return this.coursesService.getCourses(this.currentPage, params.queryParams['filter']);
+			})
+			.subscribe((courses: CourseDetailed[]): void => {
+				this.courses = courses;
+				this.coursesCount = this.coursesService.getTotalCount();
+				this.changeDetector.markForCheck();
+				this.spinnerService.toggle(false);
+			});
 	}
 
 	public ngOnDestroy() {

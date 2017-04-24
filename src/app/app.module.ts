@@ -1,14 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {
+	BrowserModule
+} from '@angular/platform-browser';
+
+import {
+	FormsModule
+} from '@angular/forms';
+
+import {
+	HttpModule
+} from '@angular/http';
+
 import {
 	NgModule,
 	ApplicationRef
 } from '@angular/core';
+
 import {
 	removeNgStyles,
 	createNewHosts,
 } from '@angularclass/hmr';
+
 import {
 	RouterModule,
 	PreloadAllModules
@@ -17,11 +28,22 @@ import {
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
+import {
+	ENV_PROVIDERS
+} from './environment';
 
-import { AppComponent } from './app.component';
-import { NoContentComponent } from './pages/no-content';
+import {
+	ROUTES
+} from './app.routes';
+
+import {
+	AppComponent
+} from './app.component';
+
+import {
+	NoContentComponent
+} from './pages/no-content';
+
 import {
 	HeaderComponent,
 	FooterComponent,
@@ -31,12 +53,26 @@ import {
 } from './common/components';
 
 // Pages
-import { CourseDetailsModule } from './pages/course-details';
-import { CourseEditModule } from './pages/course-edit';
-import { CoursesModule } from './pages/courses';
-import { LoginModule } from './pages/login';
+import {
+	CourseDetailsModule
+} from './pages/course-details';
+
+import {
+	CourseEditModule
+} from './pages/course-edit';
+
+import {
+	CoursesModule
+} from './pages/courses';
+
+import {
+	LoginModule
+} from './pages/login';
 
 // Services
+import {
+	AuthorizedHttp
+} from './common/authorizedHttp';
 import {
 	AuthService,
 	CoursesService
@@ -71,6 +107,7 @@ import {
 	],
 	providers: [ // expose our Services and Providers into Angular's dependency injection
 		ENV_PROVIDERS,
+		AuthorizedHttp,
 		AuthService,
 		CoursesService,
 		SpinnerService

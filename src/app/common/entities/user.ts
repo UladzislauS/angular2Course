@@ -13,7 +13,7 @@ export  class User {
 	}
 
 	get password(): string {
-		return this.password;
+		return this._password;
 	}
 
 	set password(password: string) {

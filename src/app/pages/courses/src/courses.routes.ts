@@ -3,7 +3,7 @@ import { CoursesComponent }    from './courses.component';
 
 // Route Configuration
 const coursesRoutes: Routes = [
-	{ path: 'courses', component: CoursesComponent },
+	{ path: 'courses/:page', component: CoursesComponent },
 ];
 
 export const routes = RouterModule.forChild(coursesRoutes);

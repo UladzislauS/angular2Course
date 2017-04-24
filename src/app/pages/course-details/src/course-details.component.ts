@@ -22,14 +22,10 @@ export class CourseDetailsComponent {
 	private _course: CourseDetailed;
 
 	constructor() {
-		this._course = new CourseDetailed(1, 'First course', loremIpsum, 110, new Date(), 'Uladzislau Sipaila', 0, false);
+		this._course = new CourseDetailed(1, 'First course', loremIpsum, 110, new Date(), 'Uladzislau Sipaila', false);
 	}
 
 	get course(): CourseDetailed {
 		return this._course;
-	}
-
-	public like() {
-		this._course.likes++;
 	}
 }

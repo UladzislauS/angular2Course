@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../components/confirm.component';
 import { CoursesComponent } from './courses.component';
 import { CourseComponent } from '../components/course.component';
 import { ToolboxComponent } from '../components/toolbox.component';
+import { PaginationComponent } from '../components/pagination.component';
 
 // directives
 import { CourseHighlightDirective } from '../directives/cource-highlight.directive';
@@ -24,6 +25,7 @@ import { PipesModule } from '../../../common/pipes';
 		CoursesComponent,
 		CourseComponent,
 		ToolboxComponent,
+		PaginationComponent,
 		CourseHighlightDirective
 	],
 	imports: [

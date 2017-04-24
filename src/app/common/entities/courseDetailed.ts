@@ -8,8 +8,7 @@ export  class CourseDetailed implements Course {
 		public duration: number,
 		public date: Date,
 		public author: string,
-		public likes: number,
-		public topRated: boolean
+		public isTopRated: boolean
 	) {}
 
 	get id(): number {

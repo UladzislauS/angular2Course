@@ -1,0 +1,19 @@
+<div class="pagination">
+    <a class="page-number"
+        routerLink="/courses/1"
+        preserveQueryParams
+        [ngClass]="{current: currentPage === 1}">1
+    </a>
+    <a class="page-number"
+        *ngFor="let page of pageRange | async"
+        [routerLink]="['/courses', page]"
+        preserveQueryParams
+        [ngClass]="{current: currentPage === page}">{{page}}
+    </a>
+    <a class="page-number"
+        *ngIf="pagesCount !== 1"
+        [routerLink]="['/courses', pagesCount]"
+        preserveQueryParams
+        [ngClass]="{current: currentPage === pagesCount}">{{pagesCount}}
+    </a>
+</div>

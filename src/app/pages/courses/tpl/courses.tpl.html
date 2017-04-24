@@ -1,14 +1,19 @@
 <div class="courses-list">
 	<toolbox (findCourse)="findCourse($event)"></toolbox>
 	<h4>Courses: </h4>
+
 	<div class="courses" *ngIf="courses.length">
-		<course *ngFor="let course of viewCourses | orderBy : 'date'"
+		<course *ngFor="let course of courses | orderBy : 'date'"
 			[entity]="course"
-			(deleteCourse)="deleteCourse($event)"></course>
+			(deleteCourse)="deleteCourse($event)">
+		</course>
+		<pagination [totalCount]="coursesCount" [currentPage]="currentPage"></pagination>
 	</div>
+
 	<div class="no-data" *ngIf="!courses.length">
 		No data. Feel free to add new course.
 	</div>
+
 	<confirm *ngIf="confirmDeletePopup" 
 		[message]="confirmMessage" 
 		(confirmHandler)="deleteConfirmHandler($event)"></confirm>

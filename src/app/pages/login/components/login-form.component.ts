@@ -1,12 +1,14 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
-	ViewEncapsulation,
-	Input
+	ViewEncapsulation
 } from '@angular/core';
 
 import { Router }   from '@angular/router';
+
 import { AuthService } from '../../../common/services';
+import { SpinnerService } from '../../../common/components/spinner';
+
 import { User } from '../../../common/entities';
 
 @Component({
@@ -22,11 +24,17 @@ export class LoginFormComponent {
 
 	constructor(
 		private authService: AuthService,
+		private spinnerService: SpinnerService,
 		private router: Router
 	) {}
 
 	public login() {
-		this.authService.login( new User(this.name, this.password) );
-		this.router.navigate(['/courses']);
+		this.spinnerService.toggle(true);
+		this.authService
+			.login( new User(this.name, this.password) )
+			.subscribe(() => {
+				this.spinnerService.toggle(false);
+				this.router.navigate(['/courses/1']);
+			});
 	}
 }

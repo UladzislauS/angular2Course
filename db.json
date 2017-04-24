@@ -1,0 +1,349 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "Uladzislau_S",
+      "password": "12341234"
+    }
+  ],
+  "courses": [
+    {
+      "id": 6445,
+      "name": "nisi ut fugiat duis",
+      "description": "Culpa fugiat dolore in non proident ex excepteur est enim nulla veniam. Sint consectetur ea laboris labore cupidatat consequat veniam in sit proident. Qui dolore proident sunt amet eiusmod dolor nostrud.",
+      "isTopRated": false,
+      "date": "2017-02-11T12:05:49+00:00",
+      "author": {
+        "id": 2861,
+        "firstName": "Hubbard",
+        "lastName": "Morrison"
+      },
+      "duration": 364
+    },
+    {
+      "id": 7679,
+      "name": "Lorem laboris occaecat sunt",
+      "description": "Ad laborum irure ut aute. Nulla eu minim esse qui elit elit proident ad velit quis id. Ut mollit sunt non dolor mollit nulla pariatur incididunt quis.",
+      "isTopRated": true,
+      "date": "2017-06-17T15:21:28+00:00",
+      "author": {
+        "id": 6507,
+        "firstName": "Justice",
+        "lastName": "Maddox"
+      },
+      "duration": 344
+    },
+    {
+      "id": 3395,
+      "name": "enim irure ea voluptate",
+      "description": "Exercitation mollit qui minim pariatur ad esse voluptate sunt qui irure adipisicing. Do veniam aute eu veniam duis ad et. Dolore dolore sint ipsum ut sunt amet esse laborum esse cupidatat consequat proident labore et.",
+      "isTopRated": true,
+      "date": "2017-10-16T02:38:03+00:00",
+      "author": {
+        "id": 367,
+        "firstName": "Cantrell",
+        "lastName": "Ware"
+      },
+      "duration": 255
+    },
+    {
+      "id": 4984,
+      "name": "velit irure consequat aliqua",
+      "description": "Do qui mollit amet ut. Laborum veniam irure nisi consequat sint consectetur commodo occaecat enim deserunt. Do sit culpa nulla reprehenderit do deserunt labore pariatur ad.",
+      "isTopRated": true,
+      "date": "2016-08-14T09:29:54+00:00",
+      "author": {
+        "id": 2643,
+        "firstName": "Joann",
+        "lastName": "Daniels"
+      },
+      "duration": 229
+    },
+    {
+      "id": 952,
+      "name": "commodo labore id aliqua",
+      "description": "Velit ipsum nisi sint sunt duis veniam anim consectetur. Velit exercitation sit amet minim sit anim veniam. Id pariatur exercitation commodo irure duis deserunt esse in culpa anim velit nisi aliquip.",
+      "isTopRated": false,
+      "date": "2016-03-05T07:47:45+00:00",
+      "author": {
+        "id": 7252,
+        "firstName": "Isabella",
+        "lastName": "Forbes"
+      },
+      "duration": 341
+    },
+    {
+      "id": 4025,
+      "name": "elit proident non elit",
+      "description": "Reprehenderit non ex enim enim dolore ea aliquip esse. Do non elit laborum labore ut consequat et mollit non aute velit adipisicing tempor non. Cupidatat cillum Lorem dolore fugiat commodo amet dolor deserunt est.",
+      "isTopRated": true,
+      "date": "2017-10-13T09:32:10+00:00",
+      "author": {
+        "id": 1831,
+        "firstName": "Deleon",
+        "lastName": "Dotson"
+      },
+      "duration": 127
+    },
+    {
+      "id": 6645,
+      "name": "veniam proident magna in",
+      "description": "Minim in ipsum consequat ut incididunt magna anim do duis voluptate consequat irure do. Exercitation esse adipisicing duis consectetur elit minim tempor exercitation pariatur sint sint. Excepteur deserunt consectetur cupidatat proident in irure deserunt.",
+      "isTopRated": false,
+      "date": "2017-10-28T20:28:54+00:00",
+      "author": {
+        "id": 5541,
+        "firstName": "Kris",
+        "lastName": "Stout"
+      },
+      "duration": 319
+    },
+    {
+      "id": 8849,
+      "name": "consequat ex tempor est",
+      "description": "Culpa cupidatat laborum mollit ut. Eu anim laborum nulla ipsum ut dolore et ipsum. Proident enim sit proident pariatur do.",
+      "isTopRated": false,
+      "date": "2017-10-23T17:08:41+00:00",
+      "author": {
+        "id": 680,
+        "firstName": "Bradley",
+        "lastName": "Potts"
+      },
+      "duration": 143
+    },
+    {
+      "id": 4329,
+      "name": "elit deserunt ut ipsum",
+      "description": "Sit officia qui commodo culpa pariatur aliqua elit occaecat Lorem officia consequat dolore voluptate esse. Ut consequat et in laborum Lorem ut irure aute. Consectetur anim elit eu irure ipsum velit aliqua consectetur.",
+      "isTopRated": true,
+      "date": "2016-12-02T14:11:24+00:00",
+      "author": {
+        "id": 666,
+        "firstName": "Kelli",
+        "lastName": "Cole"
+      },
+      "duration": 90
+    },
+    {
+      "id": 8205,
+      "name": "incididunt est nostrud incididunt",
+      "description": "Irure eiusmod deserunt ad exercitation. Ad adipisicing proident minim proident enim occaecat dolore ad eu ipsum anim nostrud incididunt. Aliqua excepteur qui consequat Lorem sit laboris laborum.",
+      "isTopRated": true,
+      "date": "2017-10-08T20:11:42+00:00",
+      "author": {
+        "id": 2636,
+        "firstName": "Lelia",
+        "lastName": "Mercado"
+      },
+      "duration": 199
+    },
+    {
+      "id": 1949,
+      "name": "aute sunt minim esse",
+      "description": "Nisi mollit dolor excepteur ipsum mollit minim in voluptate et reprehenderit. Elit pariatur anim tempor sint mollit laboris consequat veniam ad. Commodo consectetur ipsum cillum voluptate officia minim nostrud nostrud esse non sunt excepteur duis.",
+      "isTopRated": true,
+      "date": "2017-12-31T05:27:52+00:00",
+      "author": {
+        "id": 7596,
+        "firstName": "Marcella",
+        "lastName": "Solomon"
+      },
+      "duration": 201
+    },
+    {
+      "id": 7293,
+      "name": "esse incididunt ex amet",
+      "description": "Lorem fugiat elit nostrud fugiat elit eiusmod excepteur. Dolor ad labore sunt dolor dolor est Lorem elit ad eu mollit. Commodo esse fugiat quis mollit et labore occaecat eiusmod culpa amet do consequat minim.",
+      "isTopRated": true,
+      "date": "2016-10-16T09:50:21+00:00",
+      "author": {
+        "id": 6126,
+        "firstName": "Emerson",
+        "lastName": "Guzman"
+      },
+      "duration": 293
+    },
+    {
+      "id": 9851,
+      "name": "exercitation non consectetur magna",
+      "description": "Ea magna veniam aute dolor ut esse dolore dolore duis. Incididunt culpa excepteur occaecat deserunt ad excepteur enim Lorem ullamco deserunt id ex dolor elit. Cillum ipsum tempor consectetur adipisicing sunt Lorem non cillum cillum qui proident eiusmod non ad.",
+      "isTopRated": false,
+      "date": "2016-12-08T13:24:22+00:00",
+      "author": {
+        "id": 9899,
+        "firstName": "Banks",
+        "lastName": "Collins"
+      },
+      "duration": 312
+    },
+    {
+      "id": 5800,
+      "name": "veniam culpa sit est",
+      "description": "Ea mollit commodo exercitation labore Lorem aute eu reprehenderit. Aute consectetur ea eiusmod proident. Incididunt cillum laborum occaecat qui tempor voluptate nulla excepteur.",
+      "isTopRated": true,
+      "date": "2017-10-13T17:17:52+00:00",
+      "author": {
+        "id": 3900,
+        "firstName": "Copeland",
+        "lastName": "Wells"
+      },
+      "duration": 358
+    },
+    {
+      "id": 7938,
+      "name": "deserunt sunt adipisicing irure",
+      "description": "Eu labore tempor exercitation esse duis cupidatat adipisicing cillum. Nulla ipsum reprehenderit nisi quis minim pariatur laboris anim nostrud deserunt veniam ut. Magna consectetur eiusmod tempor dolore aute.",
+      "isTopRated": false,
+      "date": "2016-01-28T19:55:57+00:00",
+      "author": {
+        "id": 7394,
+        "firstName": "Bolton",
+        "lastName": "Hester"
+      },
+      "duration": 247
+    },
+    {
+      "id": 8643,
+      "name": "commodo enim irure aliqua",
+      "description": "Duis irure consequat consequat anim amet veniam elit fugiat et magna eu aute nisi. Labore tempor esse labore qui do laboris pariatur minim enim dolore voluptate aliqua. Ullamco ea cupidatat cupidatat adipisicing.",
+      "isTopRated": true,
+      "date": "2017-03-28T08:50:03+00:00",
+      "author": {
+        "id": 8613,
+        "firstName": "Giles",
+        "lastName": "Sargent"
+      },
+      "duration": 92
+    },
+    {
+      "id": 2550,
+      "name": "laboris officia proident eu",
+      "description": "Eu quis excepteur cupidatat aute Lorem tempor nisi veniam pariatur id eiusmod. Do reprehenderit duis nisi tempor non. Ea aliquip consequat ea culpa Lorem.",
+      "isTopRated": true,
+      "date": "2016-09-11T07:53:23+00:00",
+      "author": {
+        "id": 6398,
+        "firstName": "Lakisha",
+        "lastName": "England"
+      },
+      "duration": 378
+    },
+    {
+      "id": 3024,
+      "name": "et elit non duis",
+      "description": "Exercitation et occaecat do sit cillum duis elit id labore nulla enim occaecat. Qui cupidatat do exercitation sit consectetur consectetur culpa commodo laborum minim. Cupidatat pariatur irure laborum anim magna ex in id officia mollit.",
+      "isTopRated": false,
+      "date": "2016-05-20T09:30:25+00:00",
+      "author": {
+        "id": 2869,
+        "firstName": "Estes",
+        "lastName": "Huffman"
+      },
+      "duration": 153
+    },
+    {
+      "id": 4578,
+      "name": "est excepteur et magna",
+      "description": "Consectetur ea dolor Lorem aute magna consectetur. Esse nostrud dolore in dolore aliqua id qui exercitation in deserunt Lorem enim. Amet labore ex velit est pariatur laboris voluptate dolor sint magna irure cupidatat officia.",
+      "isTopRated": true,
+      "date": "2016-12-13T06:04:49+00:00",
+      "author": {
+        "id": 5734,
+        "firstName": "Saunders",
+        "lastName": "Conway"
+      },
+      "duration": 330
+    },
+    {
+      "id": 5866,
+      "name": "aliquip dolor ea ad",
+      "description": "Proident adipisicing dolor in nostrud mollit commodo deserunt enim consequat ipsum. Id commodo consequat reprehenderit non sit adipisicing amet id ea eu incididunt. Deserunt officia ut est ullamco voluptate aliquip consequat tempor nisi officia dolore nisi deserunt.",
+      "isTopRated": true,
+      "date": "2017-06-06T06:34:22+00:00",
+      "author": {
+        "id": 5433,
+        "firstName": "Kane",
+        "lastName": "Mejia"
+      },
+      "duration": 226
+    },
+    {
+      "id": 2818,
+      "name": "fugiat do proident laboris",
+      "description": "Ad deserunt est quis minim labore nulla consequat eiusmod labore veniam esse. Aute ipsum elit labore laborum est aliqua qui. Qui ullamco dolor aliquip officia non exercitation qui occaecat.",
+      "isTopRated": true,
+      "date": "2017-03-29T02:30:04+00:00",
+      "author": {
+        "id": 2624,
+        "firstName": "Elvira",
+        "lastName": "Berg"
+      },
+      "duration": 102
+    },
+    {
+      "id": 4648,
+      "name": "non culpa deserunt amet",
+      "description": "Irure deserunt consequat dolore ut esse id elit Lorem adipisicing labore cillum excepteur duis sint. Incididunt exercitation eiusmod proident amet amet veniam proident irure dolor et tempor officia id. Laboris commodo sint exercitation eiusmod do adipisicing sint eiusmod id est eu do.",
+      "isTopRated": false,
+      "date": "2017-09-16T02:26:50+00:00",
+      "author": {
+        "id": 7522,
+        "firstName": "Brooks",
+        "lastName": "Cabrera"
+      },
+      "duration": 41
+    },
+    {
+      "id": 2065,
+      "name": "laborum irure fugiat velit",
+      "description": "Occaecat nulla quis magna proident eu cillum fugiat ut consectetur aute aliquip duis voluptate reprehenderit. Nostrud irure adipisicing enim velit nostrud enim Lorem aliqua enim occaecat veniam ipsum anim. Ut eu cupidatat magna proident occaecat nulla in commodo consectetur.",
+      "isTopRated": false,
+      "date": "2017-01-13T01:01:28+00:00",
+      "author": {
+        "id": 9593,
+        "firstName": "William",
+        "lastName": "Rowe"
+      },
+      "duration": 273
+    },
+    {
+      "id": 3985,
+      "name": "in culpa fugiat nulla",
+      "description": "Laborum fugiat sint duis laborum ea minim ea dolore ea minim in. Labore cillum magna et cillum amet qui sint minim voluptate. Irure fugiat laboris cillum sunt tempor aliquip nulla adipisicing minim elit Lorem consectetur tempor.",
+      "isTopRated": false,
+      "date": "2017-07-10T16:14:14+00:00",
+      "author": {
+        "id": 3779,
+        "firstName": "Nicole",
+        "lastName": "Franklin"
+      },
+      "duration": 144
+    },
+    {
+      "id": 1515,
+      "name": "ipsum duis tempor labore",
+      "description": "Adipisicing eiusmod veniam eu mollit ullamco ipsum elit sint tempor elit sunt fugiat. Consequat et mollit mollit est enim sint veniam Lorem aliqua incididunt veniam. Laborum amet labore cupidatat elit velit magna ullamco ad cupidatat non Lorem.",
+      "isTopRated": true,
+      "date": "2016-07-01T18:41:43+00:00",
+      "author": {
+        "id": 9548,
+        "firstName": "Penelope",
+        "lastName": "David"
+      },
+      "duration": 74
+    },
+    {
+      "id": 2876,
+      "name": "ex laboris ullamco ipsum",
+      "description": "Quis excepteur non dolor minim. Occaecat dolore aute consectetur sint cillum anim minim laboris laborum. Ipsum incididunt dolore est fugiat quis duis magna elit labore commodo pariatur.",
+      "isTopRated": false,
+      "date": "2016-12-12T19:04:08+00:00",
+      "author": {
+        "id": 9385,
+        "firstName": "Golden",
+        "lastName": "Silva"
+      },
+      "duration": 240
+    }
+  ]
+}

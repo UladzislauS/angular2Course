@@ -28,10 +28,10 @@ export class CourseEditComponent {
 	}
 
 	public cancel(): void {
-		this.router.navigate(['/courses']);
+		this.router.navigate(['/courses/1']);
 	}
 
 	public add(): void {
-		this.router.navigate(['/courses']);
+		this.router.navigate(['/courses/1']);
 	}
 }
