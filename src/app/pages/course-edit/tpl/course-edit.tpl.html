@@ -1,25 +1,45 @@
-<form name="editForm" class="edit-form">
+<form [formGroup]="courseForm" name="editForm" class="edit-form">
 	<div class="title">
 		<label for="title">Title:</label>
-		<input name="title" type="text" [(ngModel)]="title">
+		<input name="title" type="text" formControlName="title">
 	</div>
+	<p *ngIf="courseForm.get('title').hasError('required') && courseForm.get('title').touched" class="error">
+		Title is required.
+	</p>
+	<p *ngIf="courseForm.get('title').hasError('maxlength') && courseForm.get('title').touched" class="error">
+		Title maximal length is 50 symbols.
+	</p>
+
 	<div class="description">
 		<label for="description">Description:</label>
-		<textarea name="description" [(ngModel)]="description"></textarea>
+		<textarea name="description" formControlName="description"></textarea>
 	</div>
-	<div class="date">
-		<label for="date">Date:</label>
-		<input name="date" type="date" [(ngModel)]="date">
-	</div>
-	<div class="duration">
-		<label for="duration">Duration:</label>
-		<input name="duration" type="number" [(ngModel)]="duration">
-		<p class="course-duration-parce">{{duration | courseDuration}}</p>
-	</div>
+	<p *ngIf="courseForm.get('description').hasError('required') && courseForm.get('description').touched" class="error">
+		Description is required.
+	</p>
+	<p *ngIf="courseForm.get('description').hasError('maxlength') && courseForm.get('description').touched" class="error">
+		Description maximal length is 50 symbols.
+	</p>
+
+	<date class="date" formControlName="date"></date>
+	<p *ngIf="courseForm.get('date').hasError('required') && courseForm.get('date').touched" class="error">
+		{{ courseForm.get('date').errors['required'] }}
+	</p>
+	<p *ngIf="courseForm.get('date').hasError('pattern') && courseForm.get('date').touched" class="error">
+		{{ courseForm.get('date').errors['pattern'] }}
+	</p>
+
+	<duration class="duration" formControlName="duration"></duration>
+	<p *ngIf="courseForm.get('duration').hasError('required') && courseForm.get('duration').touched" class="error">
+		{{ courseForm.get('duration').errors['required'] }}
+	</p>
+	<p *ngIf="courseForm.get('duration').hasError('pattern') && courseForm.get('duration').touched" class="error">
+		{{ courseForm.get('duration').errors['pattern'] }}
+	</p>
 
 	<!--skipped by condition
 	<authors></authors>-->
 
-	<button (click)="add()">Add</button>
+	<button [disabled]="!courseForm.valid" [ngClass]="{disabled : !courseForm.valid}" (click)="add()">Add</button>
 	<button (click)="cancel()">Cancel</button>
 </form>

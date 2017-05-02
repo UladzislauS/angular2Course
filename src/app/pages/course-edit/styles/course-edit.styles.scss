@@ -15,6 +15,30 @@
         }
     }
 
+    .title, .description {
+        .ng-valid.ng-touched {
+            border: 1px solid $green;
+            box-shadow: inset 0px 0px 2px $green;
+        }
+
+        .ng-invalid.ng-touched{
+            border: 1px solid $red;
+            box-shadow: inset 0px 0px 2px $red;
+        }
+    }
+
+    .date, .duration {
+        &.ng-valid.ng-touched input {
+            border: 1px solid $green;
+            box-shadow: inset 0px 0px 2px $green;
+        }
+
+        &.ng-invalid.ng-touched input {
+            border: 1px solid $red;
+            box-shadow: inset 0px 0px 2px $red;
+        }
+    }
+
     .duration {
         position: relative;
 

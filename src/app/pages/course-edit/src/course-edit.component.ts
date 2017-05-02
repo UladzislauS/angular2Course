@@ -4,7 +4,19 @@ import {
 	OnInit,
 	ChangeDetectionStrategy
 } from '@angular/core';
-import { Router } from '@angular/router';
+
+import {
+	Router
+} from '@angular/router';
+
+import {
+	FormBuilder,
+	FormGroup,
+	Validators
+} from '@angular/forms';
+
+import { durationValidator } from '../validators/duration.validator';
+import { dateValidator } from '../validators/date.validator';
 
 @Component({
 	selector: 'course-edit',
@@ -15,16 +27,18 @@ import { Router } from '@angular/router';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseEditComponent {
-	public title: string;
-	public description: string;
-	public date: Date;
-	public duration: number;
+	public courseForm: FormGroup;
 
-	constructor(private router: Router) {
-		this.title = '';
-		this.description = '';
-		this.date = null;
-		this.duration = 0;
+	constructor(
+		private formBuilder: FormBuilder,
+		private router: Router
+	) {
+		this.courseForm = this.formBuilder.group({
+			date: [ '', dateValidator(true) ],
+			description: ['123', [ Validators.required, Validators.maxLength(500) ] ],
+			duration: ['0', durationValidator(true)],
+			title: ['123', [ Validators.required, Validators.maxLength(50) ] ]
+		});
 	}
 
 	public cancel(): void {

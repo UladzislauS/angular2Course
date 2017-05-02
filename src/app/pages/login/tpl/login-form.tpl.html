@@ -1,11 +1,11 @@
-<form name="loginForm" class="login-form">
+<form #loginForm="ngForm" name="loginForm" class="login-form">
 	<p class="name">
 		<label for="name">login:</label>
-		<input name="name" type="text" [(ngModel)]="name">
+		<input name="name" type="text" [ngModel]="name" required>
 	</p>
 	<p class="password">
 		<label for="password">password:</label>
-		<input name="password" type="password" [(ngModel)]="password">
+		<input name="password" type="password" [ngModel]="password" required>
 	</p>
-	<button (click)="login()">Login</button>
+	<button [disabled]="!loginForm.valid" [ngClass]="{disabled : !loginForm.valid}" (click)="login()">Login</button>
 </form>

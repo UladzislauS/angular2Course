@@ -45,4 +45,13 @@ button {
 	.container {
 		flex-grow: 1;
 	}
+
+	.disabled {
+        background-color: $dark-gray;
+        cursor: not-allowed;
+    }
+
+	.error {
+		color: $red;
+	}
 }
