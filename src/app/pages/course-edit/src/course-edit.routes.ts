@@ -9,7 +9,7 @@ const loginRoutes: Routes = [
 	{
 		path: 'course-edit',
 		component: CourseEditComponent
-	},
+	}
 ];
 
 export const routes = RouterModule.forChild(loginRoutes);

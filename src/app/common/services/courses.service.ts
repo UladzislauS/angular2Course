@@ -64,6 +64,26 @@ export class CoursesService {
 		return this.totalCount;
 	}
 
+	public getCourse(id: number): Subject<CourseDetailed> {
+		const url = `${this.url}?id=${id}`;
+		const course: Subject<CourseDetailed> = new Subject();
+
+		const subscription = this.http
+			.get(url)
+			.subscribe((response: Response): void => {
+				const data = response.json();
+				const courses = data.map((node) => {
+					return new CourseDetailed(node.id, node.name, node.description, node.duration, new Date(node.date),
+						node.author, node.isTopRated);
+				});
+
+				course.next(courses[0]);
+				subscription.unsubscribe();
+			});
+
+		return course;
+	}
+
 	public addNewCourse(course: CourseDetailed): Observable<CourseDetailed[]> {
 		const courses: CourseDetailed[] = this.courses.getValue();
 		courses.push(course);

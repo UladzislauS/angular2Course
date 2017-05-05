@@ -1,6 +1,7 @@
 import {
 	forwardRef,
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	Input,
 	OnChanges,
@@ -43,6 +44,8 @@ export class DurationInputComponent implements ControlValueAccessor, Input, OnCh
 	private propagateTouched: Function;
 	private validateFunction: Function;
 
+	constructor(private changeDetector: ChangeDetectorRef) {}
+
 	public get duration(): Date {
 		return this._duration;
 	}
@@ -58,8 +61,9 @@ export class DurationInputComponent implements ControlValueAccessor, Input, OnCh
 	}
 
 	public writeValue(value: Date) {
-		if (value) {
+		if (value !== this._duration) {
 			this._duration = value;
+			this.changeDetector.markForCheck();
 		}
 	}
 

@@ -45,8 +45,4 @@ export class ToolboxComponent implements OnInit, OnDestroy {
 	public ngOnDestroy() {
 		this.subscription.unsubscribe();
 	}
-
-	public addCourse() {
-		console.log('Nothing');
-	}
 }

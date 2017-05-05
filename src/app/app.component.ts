@@ -8,6 +8,13 @@ import {
 	ChangeDetectionStrategy
 } from '@angular/core';
 
+import {
+	Event,
+	NavigationStart,
+	Router
+} from '@angular/router';
+
+import { AuthService } from './common/services';
 /*
  * App Component
  * Top Level Component
@@ -24,4 +31,24 @@ import {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AppComponent {}
+export class AppComponent {
+	private isAuth: boolean;
+
+	constructor(
+		private auth: AuthService,
+		private router: Router
+	) {
+		auth.isAuthenticated.subscribe((isAuth: boolean) => {
+			this.isAuth = isAuth;
+		});
+
+		router.events
+			.filter((event: Event) => event instanceof NavigationStart)
+			.subscribe((event: NavigationStart) => {
+				console.log(event.url);
+				if (!this.isAuth && event.url !== '/login') {
+					this.router.navigate(['login']);
+				}
+			})
+	}
+}

@@ -1,11 +1,12 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
-	ViewEncapsulation,
 	OnInit,
-	ChangeDetectionStrategy
+	ViewEncapsulation
 } from '@angular/core';
 
 import {
+	ActivatedRoute,
 	Router
 } from '@angular/router';
 
@@ -15,8 +16,17 @@ import {
 	Validators
 } from '@angular/forms';
 
-import { durationValidator } from '../validators/duration.validator';
-import { dateValidator } from '../validators/date.validator';
+import {
+	CoursesService
+} from '../../../common/services';
+
+import {
+	durationValidator
+} from '../validators/duration.validator';
+
+import {
+	dateValidator
+} from '../validators/date.validator';
 
 @Component({
 	selector: 'course-edit',
@@ -26,19 +36,41 @@ import { dateValidator } from '../validators/date.validator';
 	templateUrl: '../tpl/course-edit.tpl.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseEditComponent {
+export class CourseEditComponent implements OnInit {
 	public courseForm: FormGroup;
 
 	constructor(
+		private coursesService: CoursesService,
 		private formBuilder: FormBuilder,
+		private route: ActivatedRoute,
 		private router: Router
 	) {
 		this.courseForm = this.formBuilder.group({
 			date: [ '', dateValidator(true) ],
-			description: ['123', [ Validators.required, Validators.maxLength(500) ] ],
+			description: ['', [ Validators.required, Validators.maxLength(500) ] ],
 			duration: ['0', durationValidator(true)],
-			title: ['123', [ Validators.required, Validators.maxLength(50) ] ]
+			title: ['', [ Validators.required, Validators.maxLength(50) ] ]
 		});
+	}
+
+	public ngOnInit() {
+		const id = this.route.snapshot.params['id'];
+		if (!id) {
+			return;
+		}
+
+		const subscription = this.coursesService
+			.getCourse(id)
+			.subscribe((course) => {
+				this.courseForm.setValue({
+					date: course.date.toLocaleDateString(),
+					description: course.description,
+					duration: `${course.duration}`,
+					title: course.name
+				});
+
+				subscription.unsubscribe();
+			});
 	}
 
 	public cancel(): void {

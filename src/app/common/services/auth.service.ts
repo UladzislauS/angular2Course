@@ -60,6 +60,7 @@ export class AuthService {
 		this._user = null;
 		this._userInfo.next(null);
 		this._isAuthenticated.next(false);
+		sessionStorage['token'] = undefined;
 
 		return this._userInfo.asObservable();
 	}

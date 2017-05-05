@@ -6,8 +6,9 @@ import {
 	OnDestroy,
 	ViewEncapsulation
 } from '@angular/core';
-import { AuthService } from '../../../services';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../services';
 
 @Component({
 	selector: 'app-header',
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private authService: AuthService,
-		private changeDetector: ChangeDetectorRef
+		private changeDetector: ChangeDetectorRef,
+		private router: Router
 	) {}
 
 	get userName(): string {
@@ -38,6 +40,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	public logout(): void {
 		this.authService.logout();
+		this.router.navigate(['/login']);
+
 	}
 
 	public ngOnInit(): void {

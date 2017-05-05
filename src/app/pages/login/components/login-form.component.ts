@@ -1,6 +1,8 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
+	OnInit,
 	ViewEncapsulation
 } from '@angular/core';
 
@@ -18,23 +20,36 @@ import { User } from '../../../common/entities';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
 	public name: string;
 	public password: string;
+	public errorMessage: string;
 
 	constructor(
 		private authService: AuthService,
+		private changeDetector: ChangeDetectorRef,
 		private spinnerService: SpinnerService,
 		private router: Router
 	) {}
+
+	public ngOnInit() {
+		this.name = '';
+		this.password = '';
+	}
 
 	public login() {
 		this.spinnerService.toggle(true);
 		this.authService
 			.login( new User(this.name, this.password) )
-			.subscribe(() => {
+			.subscribe((info: string) => {
+				this.errorMessage = !info ? 'Username or password is wrong' : null;
 				this.spinnerService.toggle(false);
-				this.router.navigate(['/courses/1']);
+
+				if (info) {
+					this.router.navigate(['/courses/1']);
+				}
+
+				this.changeDetector.markForCheck();
 			});
 	}
 }
