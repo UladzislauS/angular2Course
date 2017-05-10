@@ -19,6 +19,7 @@ import {
 } from 'rxjs';
 
 import {
+	Breadcrumb,
 	CourseDetailed
 } from '../../../common/entities';
 
@@ -28,6 +29,7 @@ import {
 } from '../../../common/services';
 
 import {
+	BreadcrumbsService,
 	SpinnerService
 } from '../../../common/components';
 
@@ -50,6 +52,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private authService: AuthService,
+		private breadcrumbsService: BreadcrumbsService,
 		private changeDetector: ChangeDetectorRef,
 		private coursesService: CoursesService,
 		private route: ActivatedRoute,
@@ -89,6 +92,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit() {
+		this.breadcrumbsService.setBreadcrumbs([
+			new Breadcrumb('Courses', ['/courses/1'])
+		]);
+
 		this.subscription = Observable
 			.combineLatest(this.route.params, this.route.queryParams, (params, queryParams) => ({params, queryParams}))
 			.switchMap((params) => {

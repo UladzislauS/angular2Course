@@ -1,4 +1,16 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+	Component,
+	ViewEncapsulation,
+	OnInit
+} from '@angular/core';
+
+import {
+	BreadcrumbsService
+} from '../../../common/components';
+
+import {
+	Breadcrumb
+} from '../../../common/entities';
 
 @Component({
 	selector: 'login',
@@ -7,4 +19,12 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 	styles: [require('../styles/login.styles.scss')],
 	templateUrl: '../tpl/login.tpl.html'
 })
-export class LoginComponent {}
+export class LoginComponent implements OnInit{
+	constructor(private breadcrumbService: BreadcrumbsService) {}
+
+	public ngOnInit() {
+		this.breadcrumbService.setBreadcrumbs([
+			new Breadcrumb('Courses', ['/courses/1'])
+		]);
+	}
+}

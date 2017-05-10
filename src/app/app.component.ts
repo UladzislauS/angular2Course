@@ -45,7 +45,6 @@ export class AppComponent {
 		router.events
 			.filter((event: Event) => event instanceof NavigationStart)
 			.subscribe((event: NavigationStart) => {
-				console.log(event.url);
 				if (!this.isAuth && event.url !== '/login') {
 					this.router.navigate(['login']);
 				}

@@ -45,10 +45,10 @@ import {
 } from './pages/no-content';
 
 import {
+	BreadcrumbsComponent,
 	HeaderComponent,
 	FooterComponent,
 	LogoComponent,
-	MenuComponent,
 	SpinnerComponent
 } from './common/components';
 
@@ -78,6 +78,7 @@ import {
 	CoursesService
 } from './common/services';
 import {
+	BreadcrumbsService,
 	SpinnerService
 } from './common/components';
 
@@ -88,10 +89,10 @@ import {
 	bootstrap: [AppComponent],
 	declarations: [
 		AppComponent,
+		BreadcrumbsComponent,
 		FooterComponent,
 		HeaderComponent,
 		LogoComponent,
-		MenuComponent,
 		NoContentComponent,
 		SpinnerComponent
 	],
@@ -109,6 +110,7 @@ import {
 		ENV_PROVIDERS,
 		AuthorizedHttp,
 		AuthService,
+		BreadcrumbsService,
 		CoursesService,
 		SpinnerService
 	]

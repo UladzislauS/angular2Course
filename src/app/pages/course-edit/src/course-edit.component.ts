@@ -21,6 +21,14 @@ import {
 } from '../../../common/services';
 
 import {
+	BreadcrumbsService
+} from '../../../common/components';
+
+import {
+	Breadcrumb
+} from '../../../common/entities';
+
+import {
 	durationValidator
 } from '../validators/duration.validator';
 
@@ -40,6 +48,7 @@ export class CourseEditComponent implements OnInit {
 	public courseForm: FormGroup;
 
 	constructor(
+		private breadcrumbsService: BreadcrumbsService,
 		private coursesService: CoursesService,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
@@ -55,6 +64,13 @@ export class CourseEditComponent implements OnInit {
 
 	public ngOnInit() {
 		const id = this.route.snapshot.params['id'];
+		const params = id ?  ['/course-edit', { id } ] : ['/course-edit'];
+
+		this.breadcrumbsService.setBreadcrumbs([
+			new Breadcrumb('Courses', ['/courses/1']),
+			new Breadcrumb(`Course ${id || ''}`, params)
+		]);
+
 		if (!id) {
 			return;
 		}
