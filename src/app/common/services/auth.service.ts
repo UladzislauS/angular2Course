@@ -32,8 +32,8 @@ export class AuthService {
 		this._isAuthenticated = new BehaviorSubject(false);
 	}
 
-	public get userInfo(): Observable<string> {
-		return this._userInfo.asObservable();
+	public get userInfo(): BehaviorSubject<string> {
+		return this._userInfo;
 	}
 
 	public get isAuthenticated(): Observable<boolean> {

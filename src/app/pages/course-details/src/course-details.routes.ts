@@ -7,6 +7,7 @@ const loginRoutes: Routes = [
 	{
 		path: 'course-details',
 		component: CourseDetailsComponent
+	}
 ];
 
 export const routes = RouterModule.forChild(loginRoutes);

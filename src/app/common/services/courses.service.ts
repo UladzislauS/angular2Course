@@ -84,23 +84,49 @@ export class CoursesService {
 		return course;
 	}
 
-	public addNewCourse(course: CourseDetailed): Observable<CourseDetailed[]> {
-		const courses: CourseDetailed[] = this.courses.getValue();
-		courses.push(course);
-		this.courses.next(courses);
+	public addNewCourse(course: CourseDetailed): Subject<CourseDetailed> {
+		const newCourse: Subject<CourseDetailed> = new Subject();
 
-		return this.courses;
+		const subscription = this.http
+			.post(this.url, course)
+			.subscribe((response: Response): void => {
+				const data = response.json();
+
+				let addedCourse = null;
+
+				if (data.id) {
+					addedCourse = new CourseDetailed(data.id, data.name, data.description, data.duration,
+						new Date(data.date), data.author, data.isTopRated);
+				}
+
+				newCourse.next(addedCourse);
+				subscription.unsubscribe();
+			});
+
+		return newCourse;
 	}
 
-	public updateCourse(newCourse: CourseDetailed): Observable<CourseDetailed[]> {
-		const course = this.getCourseById(newCourse.id);
+	public updateCourse(id: number, course: CourseDetailed): Subject<CourseDetailed> {
+		const url = `${this.url}/${id}`;
+		const newCourse: Subject<CourseDetailed> = new Subject();
 
-		course.author = newCourse.author;
-		course.date = newCourse.date;
-		course.description = newCourse.description;
-		course.duration = newCourse.duration;
+		const subscription = this.http
+			.put(url, course)
+			.subscribe((response: Response): void => {
+				const data = response.json();
 
-		return this.courses;
+				let addedCourse = null;
+
+				if (data.id) {
+					addedCourse = new CourseDetailed(data.id, data.name, data.description, data.duration,
+						new Date(data.date), data.author, data.isTopRated);
+				}
+
+				newCourse.next(addedCourse);
+				subscription.unsubscribe();
+			});
+
+		return newCourse;
 	}
 
 	public removeCourse(id: number): Subject<CourseDetailed[]> {
@@ -118,15 +144,5 @@ export class CoursesService {
 		});
 
 		return subject;
-	}
-
-	public getCourseById(id: number): CourseDetailed {
-		for ( let course of this.courses.getValue() ) {
-			if (course.id === id) {
-				return course;
-			}
-		}
-
-		return null;
 	}
 }

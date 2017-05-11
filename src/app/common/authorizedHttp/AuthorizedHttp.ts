@@ -25,6 +25,13 @@ export class AuthorizedHttp {
 		return this.http.post(url, data, {headers});
 	}
 
+	public put(url, data) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+
+		return this.http.put(url, data, {headers});
+	}
+
 	public delete(url) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);

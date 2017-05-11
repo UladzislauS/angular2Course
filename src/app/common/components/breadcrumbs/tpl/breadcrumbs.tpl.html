@@ -1,6 +1,8 @@
 <div class="menu-list">
-    <a *ngFor="let breadcrumb of breadcrumbs" [routerLink]="breadcrumb.url"
-       class="menu-link">
+    <a *ngFor="let breadcrumb of breadcrumbs; let isLast = last"
+        [routerLink]="breadcrumb.url"
+        [ngClass]="{'not-last': !isLast}"
+        class="menu-link">
         {{breadcrumb.name}}
     </a>
 </div>

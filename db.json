@@ -9,9 +9,9 @@
   "courses": [
     {
       "id": 6445,
-      "name": "nisi ut fugiat duis",
-      "description": "Culpa fugiat dolore in non proident ex excepteur est enim nulla veniam. Sint consectetur ea laboris labore cupidatat consequat veniam in sit proident. Qui dolore proident sunt amet eiusmod dolor nostrud.",
-      "isTopRated": false,
+      "name": "name",
+      "description": "Description.",
+      "isTopRated": true,
       "date": "2017-02-11T12:05:49+00:00",
       "author": {
         "id": 2861,
@@ -60,17 +60,14 @@
       "duration": 229
     },
     {
-      "id": 952,
-      "name": "commodo labore id aliqua",
+      "_id": "952",
+      "name": "commodo",
       "description": "Velit ipsum nisi sint sunt duis veniam anim consectetur. Velit exercitation sit amet minim sit anim veniam. Id pariatur exercitation commodo irure duis deserunt esse in culpa anim velit nisi aliquip.",
-      "isTopRated": false,
-      "date": "2016-03-05T07:47:45+00:00",
-      "author": {
-        "id": 7252,
-        "firstName": "Isabella",
-        "lastName": "Forbes"
-      },
-      "duration": 341
+      "duration": 341,
+      "date": "2016-03-04T21:00:00.000Z",
+      "author": "Uladzislau_S",
+      "isTopRated": true,
+      "id": 952
     },
     {
       "id": 4025,
@@ -331,6 +328,29 @@
         "lastName": "Silva"
       },
       "duration": 240
+    },
+    {
+      "id": 111111,
+      "name": "name",
+      "description": "Description.",
+      "isTopRated": true,
+      "date": "2017-02-11T12:05:49+00:00",
+      "author": {
+        "id": 2861,
+        "firstName": "Hubbard",
+        "lastName": "Morrison"
+      },
+      "duration": 364
+    },
+    {
+      "_id": "111112",
+      "name": "Tests",
+      "description": "Tests",
+      "duration": 120,
+      "date": "2012-12-11T21:00:00.000Z",
+      "author": "Uladzislau_S",
+      "isTopRated": true,
+      "id": 111112
     }
   ]
 }

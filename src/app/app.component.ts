@@ -48,6 +48,6 @@ export class AppComponent {
 				if (!this.isAuth && event.url !== '/login') {
 					this.router.navigate(['login']);
 				}
-			})
+			});
 	}
 }

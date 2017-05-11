@@ -19,7 +19,7 @@ import {
 	styles: [require('../styles/login.styles.scss')],
 	templateUrl: '../tpl/login.tpl.html'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 	constructor(private breadcrumbService: BreadcrumbsService) {}
 
 	public ngOnInit() {
