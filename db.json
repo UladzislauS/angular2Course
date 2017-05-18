@@ -21,17 +21,14 @@
       "duration": 364
     },
     {
-      "id": 7679,
-      "name": "Lorem laboris occaecat sunt",
+      "_id": "7679",
+      "name": "Lorem laboris occaecat",
       "description": "Ad laborum irure ut aute. Nulla eu minim esse qui elit elit proident ad velit quis id. Ut mollit sunt non dolor mollit nulla pariatur incididunt quis.",
+      "duration": 344,
+      "date": "2017-06-16T21:00:00.000Z",
+      "author": "Uladzislau_S",
       "isTopRated": true,
-      "date": "2017-06-17T15:21:28+00:00",
-      "author": {
-        "id": 6507,
-        "firstName": "Justice",
-        "lastName": "Maddox"
-      },
-      "duration": 344
+      "id": 7679
     },
     {
       "id": 3395,

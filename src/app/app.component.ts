@@ -14,7 +14,13 @@ import {
 	Router
 } from '@angular/router';
 
-import { AuthService } from './common/services';
+import {
+	Store
+} from '@ngrx/store';
+
+import {
+	UserInfo
+} from './common/entities';
 /*
  * App Component
  * Top Level Component
@@ -35,11 +41,11 @@ export class AppComponent {
 	private isAuth: boolean;
 
 	constructor(
-		private auth: AuthService,
-		private router: Router
+		private router: Router,
+		private store: Store<UserInfo>
 	) {
-		auth.isAuthenticated.subscribe((isAuth: boolean) => {
-			this.isAuth = isAuth;
+		this.store.select('auth').subscribe((res: UserInfo) => {
+			this.isAuth = res.isAuth;
 		});
 
 		router.events

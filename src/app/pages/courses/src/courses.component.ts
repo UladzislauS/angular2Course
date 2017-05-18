@@ -19,18 +19,21 @@ import {
 } from 'rxjs';
 
 import {
+	Store
+} from '@ngrx/store';
+
+import {
 	Breadcrumb,
-	CourseDetailed
+	CourseDetailed,
+	CoursesState
 } from '../../../common/entities';
 
 import {
-	AuthService,
 	CoursesService
 } from '../../../common/services';
 
 import {
-	BreadcrumbsService,
-	SpinnerService
+	BreadcrumbsService
 } from '../../../common/components';
 
 @Component({
@@ -48,16 +51,16 @@ export class CoursesComponent implements OnInit, OnDestroy {
 	public currentPage: number;
 
 	private removableCourseId: number;
-	private subscription: Subscription;
+	private paramsSubscription: Subscription;
+	private storeSubscription: Subscription;
 
 	constructor(
-		private authService: AuthService,
 		private breadcrumbsService: BreadcrumbsService,
 		private changeDetector: ChangeDetectorRef,
 		private coursesService: CoursesService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private spinnerService: SpinnerService
+		private store: Store<CoursesState>
 	) {
 		this.courses = [];
 		this.confirmDeletePopup = false;
@@ -71,15 +74,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
 	public deleteConfirmHandler(value: boolean): void {
 		if (value) {
-			this.spinnerService.toggle(true);
-			this.coursesService
-				.removeCourse(this.removableCourseId)
-				.subscribe(
-					() => {},
-					() => {},
-					() => {
-						this.spinnerService.toggle(false);
-					});
+			this.coursesService.removeCourse(this.removableCourseId);
 		}
 		this.removableCourseId = null;
 		this.confirmDeletePopup = false;
@@ -96,23 +91,24 @@ export class CoursesComponent implements OnInit, OnDestroy {
 			new Breadcrumb('Courses', ['/courses/1'])
 		]);
 
-		this.subscription = Observable
+		this.paramsSubscription = Observable
 			.combineLatest(this.route.params, this.route.queryParams, (params, queryParams) => ({params, queryParams}))
-			.switchMap((params) => {
+			.subscribe((params) => {
 				this.currentPage = +params.params['page'];
-				this.spinnerService.toggle(true);
 
-				return this.coursesService.getCourses(this.currentPage, params.queryParams['filter']);
-			})
-			.subscribe((courses: CourseDetailed[]): void => {
-				this.courses = courses;
-				this.coursesCount = this.coursesService.getTotalCount();
+				return this.coursesService.loadCourses(this.currentPage, params.queryParams['filter']);
+			});
+
+		this.paramsSubscription = this.store
+			.select('courses')
+			.subscribe((coursesState: CoursesState): void => {
+				this.courses = coursesState.courses;
+				this.coursesCount = coursesState.totalCount;
 				this.changeDetector.markForCheck();
-				this.spinnerService.toggle(false);
 			});
 	}
 
 	public ngOnDestroy() {
-		this.subscription.unsubscribe();
+		this.paramsSubscription.unsubscribe();
 	}
 }

@@ -11,6 +11,10 @@ import {
 } from '@angular/http';
 
 import {
+	StoreModule
+} from '@ngrx/store';
+
+import {
 	NgModule,
 	ApplicationRef
 } from '@angular/core';
@@ -77,10 +81,17 @@ import {
 	AuthService,
 	CoursesService
 } from './common/services';
+
 import {
-	BreadcrumbsService,
-	SpinnerService
+	BreadcrumbsService
 } from './common/components';
+
+// Reducers
+import {
+	authReducer,
+	coursesReducer,
+	spinnerReducer
+} from './common/reducers';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -96,23 +107,27 @@ import {
 		NoContentComponent,
 		SpinnerComponent
 	],
-	imports: [ // import Angular's modules
+	imports: [
 		BrowserModule,
-		FormsModule,
-		HttpModule,
-		RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
 		CoursesModule,
 		CourseDetailsModule,
 		CourseEditModule,
-		LoginModule
+		FormsModule,
+		HttpModule,
+		LoginModule,
+		RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
+		StoreModule.provideStore({
+			auth: authReducer,
+			courses: coursesReducer,
+			spinner: spinnerReducer
+		})
 	],
-	providers: [ // expose our Services and Providers into Angular's dependency injection
+	providers: [
 		ENV_PROVIDERS,
 		AuthorizedHttp,
 		AuthService,
 		BreadcrumbsService,
-		CoursesService,
-		SpinnerService
+		CoursesService
 	]
 })
 export class AppModule {

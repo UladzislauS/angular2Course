@@ -7,6 +7,10 @@ import {
 } from '@angular/http';
 
 import {
+	Store
+} from '@ngrx/store';
+
+import {
 	Observable,
 	BehaviorSubject
 } from 'rxjs';
@@ -16,52 +20,66 @@ import {
 } from '../authorizedHttp';
 
 import {
-	User
+	User,
+	UserInfo
 } from '../entities';
+
+import {
+	LOG_IN,
+	LOG_OUT,
+	TOGGLE_SPINNER_OFF,
+	TOGGLE_SPINNER_ON
+} from '../reducers';
 
 @Injectable()
 export class AuthService {
 	private url = 'http://localhost:3001/users';
-	private _user: User;
-	private _userInfo: BehaviorSubject<string>;
-	private _isAuthenticated: BehaviorSubject<boolean>;
+	private user: User;
+	private userInfo: Observable<UserInfo>;
 
-	constructor(private http: AuthorizedHttp) {
-		this._user = null;
-		this._userInfo = new BehaviorSubject('');
-		this._isAuthenticated = new BehaviorSubject(false);
+	constructor(
+		private http: AuthorizedHttp,
+		private store: Store<UserInfo>
+	) {
+		this.user = null;
+		this.userInfo = this.store.select('auth');
 	}
 
-	public get userInfo(): BehaviorSubject<string> {
-		return this._userInfo;
-	}
-
-	public get isAuthenticated(): Observable<boolean> {
-		return this._isAuthenticated.asObservable();
-	}
-
-	public login(user: User): Observable<string> {
+	public login(user: User): Observable<boolean> {
 		const url = `${this.url}?login=${user.login}&password=${user.password}`;
+
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
+		});
 
 		return this.http.get(url)
 			.map((res: Response) => {
 				const data = res.json();
 
-				this._user = data && data.length ? new User(data[0].login, data[0].password) : null;
-				this._userInfo.next(this._user ? this._user.login : null);
-				this._isAuthenticated.next(!!this._user);
-				sessionStorage['token'] = 'blabla';
+				this.user = data && data.length ? new User(data[0].login, data[0].password) : null;
+				if (this.user) {
+					this.store.dispatch({
+						type: LOG_IN,
+						payload: new UserInfo(+data[0].id, this.user.login, true)
+					});
+					sessionStorage['token'] = 'blabla';
+				}
 
-				return this._userInfo.getValue();
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_OFF
+				});
+
+				return !!this.user;
 			});
 	}
 
-	public logout(): Observable<string> {
-		this._user = null;
-		this._userInfo.next(null);
-		this._isAuthenticated.next(false);
+	public logout(): Observable<UserInfo> {
+		this.user = null;
+		this.store.dispatch({
+			type: LOG_OUT
+		});
 		sessionStorage['token'] = undefined;
 
-		return this._userInfo.asObservable();
+		return this.userInfo;
 	}
 }

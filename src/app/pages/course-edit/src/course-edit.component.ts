@@ -1,6 +1,7 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	OnDestroy,
 	OnInit,
 	ViewEncapsulation
 } from '@angular/core';
@@ -17,8 +18,15 @@ import {
 } from '@angular/forms';
 
 import {
-	CoursesService,
-	AuthService
+	Subscription
+} from 'rxjs';
+
+import {
+	Store
+} from '@ngrx/store';
+
+import {
+	CoursesService
 } from '../../../common/services';
 
 import {
@@ -27,7 +35,8 @@ import {
 
 import {
 	Breadcrumb,
-	CourseDetailed
+	CourseDetailed,
+	UserInfo
 } from '../../../common/entities';
 
 import {
@@ -46,19 +55,21 @@ import {
 	templateUrl: '../tpl/course-edit.tpl.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseEditComponent implements OnInit {
+export class CourseEditComponent implements OnInit, OnDestroy {
 	public courseForm: FormGroup;
 
+	private author: string;
 	private id: number;
 	private isNew: boolean;
+	private subscription: Subscription;
 
 	constructor(
-		private authService: AuthService,
 		private breadcrumbsService: BreadcrumbsService,
 		private coursesService: CoursesService,
 		private formBuilder: FormBuilder,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private store: Store<UserInfo>
 	) {
 		this.courseForm = this.formBuilder.group({
 			date: [ '', dateValidator(true) ],
@@ -66,6 +77,12 @@ export class CourseEditComponent implements OnInit {
 			duration: ['0', durationValidator(true)],
 			title: ['', [ Validators.required, Validators.maxLength(50) ] ]
 		});
+
+		this.subscription = this.store
+			.select('auth')
+			.subscribe((userInfo: UserInfo) => {
+				this.author = userInfo.name;
+			});
 	}
 
 	public ngOnInit() {
@@ -99,6 +116,10 @@ export class CourseEditComponent implements OnInit {
 			});
 	}
 
+	public ngOnDestroy() {
+		this.subscription.unsubscribe();
+	}
+
 	public cancel(): void {
 		this.router.navigate(['/courses/1']);
 	}
@@ -108,9 +129,8 @@ export class CourseEditComponent implements OnInit {
 		const description = this.courseForm.get('description').value;
 		const duration = +this.courseForm.get('duration').value;
 		const title = this.courseForm.get('title').value;
-		const author = this.authService.userInfo.getValue();
 
-		const newCourse = new CourseDetailed(this.id, title, description, duration, date, author, true);
+		const newCourse = new CourseDetailed(this.id, title, description, duration, date, this.author, true);
 
 		const subscribtion = (this.isNew
 			? this.coursesService.addNewCourse(newCourse)

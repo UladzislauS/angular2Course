@@ -2,13 +2,13 @@
     <logo class="logo">Logo</logo>
     <breadcrumbs class="menu"></breadcrumbs>
     <div class="user">
-        <div *ngIf="isAuth" class="logged-in">
+        <div *ngIf="userInfo.isAuth" class="logged-in">
             <span>
-                {{userName}}
+                {{userInfo.name}}
             </span>
             <a (click)="logout()" class="logoff">Logoff</a>
         </div>
-        <div *ngIf="!isAuth" class="logged-out">
+        <div *ngIf="!userInfo.isAuth" class="logged-out">
             <a routerLink="/login" class="login">Login</a>
         </div>
     </div>

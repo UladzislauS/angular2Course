@@ -6,9 +6,27 @@ import {
 	OnDestroy,
 	ViewEncapsulation
 } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../../../services';
+
+import {
+	Router
+} from '@angular/router';
+
+import {
+	Store
+} from '@ngrx/store';
+
+import {
+	Observable,
+	Subscription
+} from 'rxjs';
+
+import {
+	UserInfo
+} from '../../../entities';
+
+import {
+	AuthService
+} from '../../../services';
 
 @Component({
 	selector: 'app-header',
@@ -19,44 +37,32 @@ import { AuthService } from '../../../services';
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
-	private _userName: string;
-	private _isAuth: boolean;
-	private authSubscription: Subscription;
-	private infoSubscription: Subscription;
+	public userInfo: UserInfo;
+
+	private subscription: Subscription;
 
 	constructor(
 		private authService: AuthService,
 		private changeDetector: ChangeDetectorRef,
-		private router: Router
+		private router: Router,
+		private store: Store<UserInfo>
 	) {}
-
-	get userName(): string {
-		return this._userName;
-	}
-
-	get isAuth(): boolean {
-		return this._isAuth;
-	}
 
 	public logout(): void {
 		this.authService.logout();
 		this.router.navigate(['/login']);
-
 	}
 
 	public ngOnInit(): void {
-		this.authSubscription = this.authService.isAuthenticated.subscribe( (res: boolean): void => {
-			this._isAuth = res;
-			this.changeDetector.markForCheck();
-		});
-		this.infoSubscription = this.authService.userInfo.subscribe( (res: string): void => {
-			this._userName = res;
-			this.changeDetector.markForCheck();
-		});
+		this.subscription = this.store
+			.select('auth')
+			.subscribe( (res: UserInfo): void => {
+				this.userInfo = res;
+				this.changeDetector.markForCheck();
+			});
 	}
 
 	public ngOnDestroy() {
-		this.authSubscription.unsubscribe();
-		this.infoSubscription.unsubscribe();
+		this.subscription.unsubscribe();
 	}
 }

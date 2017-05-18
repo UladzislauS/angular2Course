@@ -6,12 +6,17 @@ import {
 	ViewEncapsulation
 } from '@angular/core';
 
-import { Router }   from '@angular/router';
+import {
+	Router
+}   from '@angular/router';
 
-import { AuthService } from '../../../common/services';
-import { SpinnerService } from '../../../common/components/spinner';
+import {
+	AuthService
+} from '../../../common/services';
 
-import { User } from '../../../common/entities';
+import {
+	User
+} from '../../../common/entities';
 
 @Component({
 	selector: 'login-form',
@@ -28,7 +33,6 @@ export class LoginFormComponent implements OnInit {
 	constructor(
 		private authService: AuthService,
 		private changeDetector: ChangeDetectorRef,
-		private spinnerService: SpinnerService,
 		private router: Router
 	) {}
 
@@ -38,18 +42,15 @@ export class LoginFormComponent implements OnInit {
 	}
 
 	public login() {
-		this.spinnerService.toggle(true);
 		this.authService
 			.login( new User(this.name, this.password) )
-			.subscribe((info: string) => {
-				this.errorMessage = !info ? 'Username or password is wrong' : null;
-				this.spinnerService.toggle(false);
-
-				if (info) {
+			.subscribe((result: boolean) => {
+				if (result) {
 					this.router.navigate(['/courses/1']);
+				} else {
+					this.errorMessage = !result ? 'Username or password is wrong' : null;
+					this.changeDetector.markForCheck();
 				}
-
-				this.changeDetector.markForCheck();
 			});
 	}
 }

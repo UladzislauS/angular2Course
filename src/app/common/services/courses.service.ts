@@ -7,6 +7,10 @@ import {
 } from '@angular/http';
 
 import {
+	Store
+} from '@ngrx/store';
+
+import {
 	Observable,
 	BehaviorSubject,
 	Subject
@@ -17,80 +21,91 @@ import {
 } from '../authorizedHttp';
 
 import {
+	CoursesState,
 	CourseDetailed
 } from '../entities';
+
+import {
+	LOAD_COURSES,
+	EDIT_COURSE,
+	TOGGLE_SPINNER_OFF,
+	TOGGLE_SPINNER_ON
+} from '../reducers';
 
 @Injectable()
 export class CoursesService {
 	private url = 'http://localhost:3001/courses';
 
-	private courses: BehaviorSubject<CourseDetailed[]>;
-	private filter: string;
-	private page: number;
-	private totalCount: number;
-
 	constructor(
-		private http: AuthorizedHttp
-	) {
-		this.courses = new BehaviorSubject([]);
-		this.totalCount = 0;
-	}
+		private http: AuthorizedHttp,
+		private store: Store<CourseDetailed[]>
+	) {}
 
-	public getCourses(page: number, filter: string): Observable<CourseDetailed[]> {
+	public loadCourses(page: number, filter: string): void {
 		const url = `${this.url}?name_like=${filter || ''}&_page=${page}&_limit=${10}`;
 
-		this.page = page;
-		this.filter = filter;
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
+		});
 
 		const subscription = this.http
 			.get(url)
 			.subscribe((response: Response): void => {
 				const data = response.json();
+				const totalCount = +response.headers.get('X-Total-Count');
 				const courses = data.map((node) => {
 					return new CourseDetailed(node.id, node.name, node.description, node.duration, node.date,
 						node.author, node.isTopRated);
 				});
 
-				this.totalCount = +response.headers.get('X-Total-Count');
-				this.courses.next(courses);
+				this.store.dispatch({
+					type: LOAD_COURSES,
+					payload: new CoursesState(page, filter, totalCount, courses)
+				});
+
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_OFF
+				});
 
 				subscription.unsubscribe();
 			});
-
-		return this.courses.asObservable();
 	}
 
-	public getTotalCount(): number {
-		return this.totalCount;
-	}
-
-	public getCourse(id: number): Subject<CourseDetailed> {
+	public getCourse(id: number): Observable<CourseDetailed> {
 		const url = `${this.url}?id=${id}`;
-		const course: Subject<CourseDetailed> = new Subject();
 
-		const subscription = this.http
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
+		});
+
+		return this.http
 			.get(url)
-			.subscribe((response: Response): void => {
+			.map((response: Response): CourseDetailed => {
 				const data = response.json();
 				const courses = data.map((node) => {
 					return new CourseDetailed(node.id, node.name, node.description, node.duration, new Date(node.date),
 						node.author, node.isTopRated);
 				});
 
-				course.next(courses[0]);
-				subscription.unsubscribe();
-			});
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_OFF
+				});
 
-		return course;
+				return courses[0];
+			});
 	}
 
 	public addNewCourse(course: CourseDetailed): Subject<CourseDetailed> {
-		const newCourse: Subject<CourseDetailed> = new Subject();
+		const response: Subject<CourseDetailed> = new Subject();
+
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
+		});
 
 		const subscription = this.http
 			.post(this.url, course)
-			.subscribe((response: Response): void => {
-				const data = response.json();
+			.subscribe((responseData: Response): void => {
+				const data = responseData.json();
 
 				let addedCourse = null;
 
@@ -99,21 +114,31 @@ export class CoursesService {
 						new Date(data.date), data.author, data.isTopRated);
 				}
 
-				newCourse.next(addedCourse);
+				response.next(addedCourse);
+				response.complete();
+
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_OFF
+				});
+
 				subscription.unsubscribe();
 			});
 
-		return newCourse;
+		return response;
 	}
 
 	public updateCourse(id: number, course: CourseDetailed): Subject<CourseDetailed> {
 		const url = `${this.url}/${id}`;
-		const newCourse: Subject<CourseDetailed> = new Subject();
+		const response: Subject<CourseDetailed> = new Subject();
+
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
+		});
 
 		const subscription = this.http
 			.put(url, course)
-			.subscribe((response: Response): void => {
-				const data = response.json();
+			.subscribe((responseData: Response): void => {
+				const data = responseData.json();
 
 				let addedCourse = null;
 
@@ -122,27 +147,44 @@ export class CoursesService {
 						new Date(data.date), data.author, data.isTopRated);
 				}
 
-				newCourse.next(addedCourse);
+				response.next(addedCourse);
+				response.complete();
+
+				this.store.dispatch({
+					type: EDIT_COURSE,
+					payload: addedCourse
+				});
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_OFF
+				});
+
 				subscription.unsubscribe();
 			});
 
-		return newCourse;
+		return response;
 	}
 
-	public removeCourse(id: number): Subject<CourseDetailed[]> {
+	public removeCourse(id: number): Subject<boolean> {
 		const url = `${this.url}/${id}`;
-		const subject = new Subject<CourseDetailed[]>();
+		const response = new Subject<boolean>();
 
-		const deleteReqSubscription = this.http.delete(url).subscribe(() => {
-			const getReqSubscription = this.getCourses(this.page, this.filter).subscribe((courses: CourseDetailed[]) => {
-				subject.next(courses);
-				subject.complete();
-				getReqSubscription.unsubscribe();
-			});
-
-			deleteReqSubscription.unsubscribe();
+		this.store.dispatch({
+			type: TOGGLE_SPINNER_ON
 		});
 
-		return subject;
+		const subscription = this.http
+			.delete(url)
+			.subscribe(() => {
+				response.next(true);
+				response.complete();
+
+				this.store.dispatch({
+					type: TOGGLE_SPINNER_ON
+				});
+
+				subscription.unsubscribe();
+			});
+
+		return response;
 	}
 }
