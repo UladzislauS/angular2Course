@@ -23,7 +23,7 @@ import {
 })
 
 export class SpinnerComponent {
-	private switch: Observable<boolean>;
+	public switch: Observable<boolean>;
 
 	constructor(
 		private store: Store<boolean>,
